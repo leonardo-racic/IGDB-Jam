@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://doqjj6i3kg3ow" path="res://Scenes/player.tscn" id="1_4a1jc"]
 
 [node name="Main" type="Node2D"]
+texture_filter = 1
 
 [node name="Camera2D" type="Camera2D" parent="."]
 

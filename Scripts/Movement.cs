@@ -17,15 +17,16 @@ public partial class Movement : Node
     plr.MoveAndSlide();
   }
 
-  public void handleMovement(double delta) {
-    // It's already normalized
+  private void handleMovement(double delta) {
     Vector2 inputDirection = Input.GetVector("move_left", "move_right", "move_up", "move_down");
     if (inputDirection != Vector2.Zero) {
       plr.Velocity = inputDirection * (float)(speed * delta);
-      // add code for animation when running
+      if (inputDirection.X != 0.0f)
+        plr.Sprite.FlipH = inputDirection.X < 0.0f;
+      plr.PlayState("move");
     } else {
       plr.Velocity *= (float)(FRICTION * delta);
-      // add code for animation when idle
+      plr.PlayState("idle");
     }
   }
 }

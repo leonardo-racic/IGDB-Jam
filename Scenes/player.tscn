@@ -1,20 +1,59 @@
-[gd_scene load_steps=5 format=3 uid="uid://doqjj6i3kg3ow"]
+[gd_scene load_steps=9 format=3 uid="uid://doqjj6i3kg3ow"]
 
 [ext_resource type="Script" path="res://Scripts/Player.cs" id="1_4e5hf"]
-[ext_resource type="Texture2D" uid="uid://do5wx6tafleug" path="res://Assets/icon.svg" id="2_kox63"]
+[ext_resource type="Texture2D" uid="uid://cwwhcul0o331m" path="res://Assets/player-Sheet.png" id="2_u5f10"]
 [ext_resource type="Script" path="res://Scripts/Movement.cs" id="3_cg28w"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_modoo"]
-radius = 61.0328
+[sub_resource type="AtlasTexture" id="AtlasTexture_xis2n"]
+atlas = ExtResource("2_u5f10")
+region = Rect2(0, 0, 64, 64)
 
-[node name="Player" type="CharacterBody2D"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_yh54d"]
+atlas = ExtResource("2_u5f10")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fqif0"]
+atlas = ExtResource("2_u5f10")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_km0qq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xis2n")
+}],
+"loop": false,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yh54d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fqif0")
+}],
+"loop": true,
+"name": &"move",
+"speed": 10.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_s1go2"]
+radius = 9.0
+height = 50.0
+
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("Sprite")]
 script = ExtResource("1_4e5hf")
+Sprite = NodePath("AnimatedSprite2D")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_km0qq")
+animation = &"move"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_modoo")
-
-[node name="Icon" type="Sprite2D" parent="."]
-texture = ExtResource("2_kox63")
+position = Vector2(0, 13)
+rotation = -1.5708
+shape = SubResource("CapsuleShape2D_s1go2")
 
 [node name="Movement" type="Node" parent="." node_paths=PackedStringArray("plr")]
 script = ExtResource("3_cg28w")
