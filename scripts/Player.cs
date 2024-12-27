@@ -7,6 +7,8 @@ public partial class Player : CharacterBody2D
   public float speed { get; set; } = 600.0f;
   [Export]
   public float friction { get; set; } = 0f;
+  [Export]
+  public float bounceFactor { get; set; } = .5f;
   private Movement movementNode;
   // Called when the node enters the scene tree for the first time.
   public override void _Ready()
@@ -31,6 +33,7 @@ public partial class Player : CharacterBody2D
       Key = new Vector2(Key.X / Key.Length(), Key.Y / Key.Length());
     Key *= speed;
     Velocity += Key;
-    movementNode.move(this, 10, (float)delta, 0);
+    movementNode.move(this, 10, (float)delta, bounceFactor);
+    Velocity *= friction;
   }
 }

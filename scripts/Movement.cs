@@ -16,8 +16,8 @@ public partial class Movement : Node
       else
       {
         //THEY HIT THE SECOND TOWER
-        body.Velocity = preVel * bounceFactor;
-        body.Position = col.GetPosition();
+        body.Velocity = body.Velocity.Bounce(col.GetNormal().Normalized()) * bounceFactor;
+        GD.Print("REFLECTING ", body.Velocity);
         return true;
       }
     }
