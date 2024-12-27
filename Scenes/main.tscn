@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://o51s4fmin34l"]
 
-[ext_resource type="PackedScene" uid="uid://doqjj6i3kg3ow" path="res://scenes/player.tscn" id="1_4a1jc"]
+[ext_resource type="PackedScene" uid="uid://doqjj6i3kg3ow" path="res://Scenes/player.tscn" id="1_4a1jc"]
 
 [node name="Main" type="Node2D"]
 
@@ -8,4 +8,3 @@
 
 [node name="Player" parent="." instance=ExtResource("1_4a1jc")]
 position = Vector2(55, 41)
-friction = 0.8
