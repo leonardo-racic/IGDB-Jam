@@ -24,11 +24,16 @@ public partial class Movement : Node
       if (inputDirection.X != 0.0f)
         plr.Sprite.FlipH = inputDirection.X < 0.0f;
       plr.PlayState("move");
-    } 
+    }
     else
     {
       plr.Velocity *= (float)(FRICTION * delta);
       plr.PlayState("idle");
     }
+  }
+
+  public void move()
+  {
+    return;
   }
 }
