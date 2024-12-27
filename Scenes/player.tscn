@@ -58,3 +58,7 @@ shape = SubResource("CapsuleShape2D_s1go2")
 [node name="Movement" type="Node" parent="." node_paths=PackedStringArray("plr")]
 script = ExtResource("3_cg28w")
 plr = NodePath("..")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0

@@ -1,11 +1,35 @@
-[gd_scene load_steps=2 format=3 uid="uid://o51s4fmin34l"]
+[gd_scene load_steps=7 format=3 uid="uid://o51s4fmin34l"]
 
 [ext_resource type="PackedScene" uid="uid://doqjj6i3kg3ow" path="res://Scenes/player.tscn" id="1_4a1jc"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_2njpf"]
+size = Vector3(1000, 1000, 1000)
+
+[sub_resource type="Curve" id="Curve_81ytm"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.406593, 0), 0.0, 0.0, 0, 0, Vector2(0.967033, 0.692308), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_bf4oy"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.510989, 0), 0.0, 0.0, 0, 0, Vector2(1, 0.747253), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_lcl7a"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.368132, 0.296703), 0.0, 0.0, 0, 0, Vector2(0.714286, 0.406593), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_mbxes"]
+curve_x = SubResource("Curve_81ytm")
+curve_y = SubResource("Curve_bf4oy")
+curve_z = SubResource("Curve_lcl7a")
 
 [node name="Main" type="Node2D"]
 texture_filter = 1
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Background" type="MeshInstance2D" parent="."]
+position = Vector2(279, 252)
+scale = Vector2(0.674, 0.674)
+mesh = SubResource("BoxMesh_2njpf")
+texture = SubResource("CurveXYZTexture_mbxes")
 
 [node name="Player" parent="." instance=ExtResource("1_4a1jc")]
 position = Vector2(55, 41)
