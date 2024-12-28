@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://doqjj6i3kg3ow"]
+[gd_scene load_steps=12 format=3 uid="uid://doqjj6i3kg3ow"]
 
 [ext_resource type="Script" path="res://Scripts/unique/Player.cs" id="1_4e5hf"]
 [ext_resource type="Texture2D" uid="uid://cwwhcul0o331m" path="res://Assets/player-Sheet.png" id="2_u5f10"]
 [ext_resource type="Script" path="res://Scripts/unique/Movement.cs" id="3_cg28w"]
 [ext_resource type="Script" path="res://Scripts/Composites/HealthNode.cs" id="3_ytnh2"]
-[ext_resource type="Script" path="res://Scripts/Composites/hurtBox.cs" id="5_tlb63"]
+[ext_resource type="Script" path="res://Scripts/Composites/Hurtbox.cs" id="5_62jck"]
+[ext_resource type="Script" path="res://Scripts/Composites/Hitbox.cs" id="6_mn3tx"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_s1go2"]
 radius = 9.0
@@ -63,17 +64,22 @@ script = ExtResource("3_ytnh2")
 [node name="Movement" type="Node" parent="." node_paths=PackedStringArray("plr")]
 script = ExtResource("3_cg28w")
 plr = NodePath("..")
-speed = 200.0
-FRICTION = 0.9
 
 [node name="Hurtbox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
-script = ExtResource("5_tlb63")
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("5_62jck")
 health = NodePath("../Health")
-damage = 2
 
 [node name="CollisionBox" type="CollisionShape2D" parent="Hurtbox"]
 position = Vector2(0, 8.595)
 rotation = -1.5708
 shape = SubResource("CapsuleShape2D_s1go2")
 
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("6_mn3tx")
+
 [connection signal="area_entered" from="Hurtbox" to="Hurtbox" method="hit"]
+[connection signal="area_entered" from="Hitbox" to="Hitbox" method="onAreaEntered"]
