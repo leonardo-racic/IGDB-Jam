@@ -11,8 +11,9 @@ public partial class Hurtbox : Area2D
       GD.PrintErr("ERROR HEALTHNODE IS INVALID ON HURTBOX PARENT NODE IS ", GetParent().GetName());
   }
 
-  public void TakeDamage(float damage)
-  {
-    health.Health -= damage;
+  public void onAreaEntered(Area2D area) {
+    if (area is Hitbox) {
+      health.Health -= (area as Hitbox).Damage;
+    }
   }
 }
