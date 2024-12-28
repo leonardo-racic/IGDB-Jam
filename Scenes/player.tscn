@@ -1,8 +1,14 @@
-[gd_scene load_steps=9 format=3 uid="uid://doqjj6i3kg3ow"]
+[gd_scene load_steps=11 format=3 uid="uid://doqjj6i3kg3ow"]
 
 [ext_resource type="Script" path="res://Scripts/Player.cs" id="1_4e5hf"]
 [ext_resource type="Texture2D" uid="uid://cwwhcul0o331m" path="res://Assets/player-Sheet.png" id="2_u5f10"]
 [ext_resource type="Script" path="res://Scripts/Movement.cs" id="3_cg28w"]
+[ext_resource type="Script" path="res://Composites/HealthNode.cs" id="3_ytnh2"]
+[ext_resource type="Script" path="res://Composites/hurtBox.cs" id="5_tlb63"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_s1go2"]
+radius = 9.0
+height = 42.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xis2n"]
 atlas = ExtResource("2_u5f10")
@@ -38,31 +44,36 @@ animations = [{
 "speed": 10.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_s1go2"]
-radius = 9.0
-height = 50.0
-
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("Sprite")]
 script = ExtResource("1_4e5hf")
 Sprite = NodePath("AnimatedSprite2D")
+
+[node name="CollisionBox" type="CollisionShape2D" parent="."]
+position = Vector2(0, 13)
+rotation = -1.5708
+shape = SubResource("CapsuleShape2D_s1go2")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_km0qq")
 animation = &"move"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 13)
-rotation = -1.5708
-shape = SubResource("CapsuleShape2D_s1go2")
+[node name="Health" type="Node" parent="."]
+script = ExtResource("3_ytnh2")
 
 [node name="Movement" type="Node" parent="." node_paths=PackedStringArray("plr")]
 script = ExtResource("3_cg28w")
 plr = NodePath("..")
-<<<<<<< HEAD
-
-[node name="Camera2D" type="Camera2D" parent="."]
-position_smoothing_enabled = true
-position_smoothing_speed = 10.0
-=======
+speed = 200.0
 FRICTION = 0.9
->>>>>>> 1dd669e (added camera.cs)
+
+[node name="Hurtbox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
+script = ExtResource("5_tlb63")
+health = NodePath("../Health")
+damage = 2
+
+[node name="CollisionBox" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(0, 8.595)
+rotation = -1.5708
+shape = SubResource("CapsuleShape2D_s1go2")
+
+[connection signal="area_entered" from="Hurtbox" to="Hurtbox" method="hit"]

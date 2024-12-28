@@ -5,7 +5,6 @@ public partial class HealthNode : Node
   [Signal]
   public delegate void DeadEventHandler();
 
-
   [Export]
   public float MaxHealth
   {

@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://o51s4fmin34l"]
+[gd_scene load_steps=8 format=3 uid="uid://o51s4fmin34l"]
 
 [ext_resource type="PackedScene" uid="uid://doqjj6i3kg3ow" path="res://Scenes/player.tscn" id="1_4a1jc"]
+[ext_resource type="Script" path="res://Scripts/camera.cs" id="1_mfgub"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_2njpf"]
 size = Vector3(1000, 1000, 1000)
@@ -26,10 +27,14 @@ curve_z = SubResource("Curve_lcl7a")
 texture_filter = 1
 
 [node name="Background" type="MeshInstance2D" parent="."]
-position = Vector2(279, 252)
+position = Vector2(0, 64)
 scale = Vector2(0.674, 0.674)
 mesh = SubResource("BoxMesh_2njpf")
 texture = SubResource("CurveXYZTexture_mbxes")
 
 [node name="Player" parent="." instance=ExtResource("1_4a1jc")]
 position = Vector2(55, 41)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+script = ExtResource("1_mfgub")
+dampening = 1.0
