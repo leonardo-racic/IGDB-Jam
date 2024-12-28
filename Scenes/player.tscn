@@ -1,10 +1,10 @@
 [gd_scene load_steps=11 format=3 uid="uid://doqjj6i3kg3ow"]
 
-[ext_resource type="Script" path="res://Scripts/Player.cs" id="1_4e5hf"]
+[ext_resource type="Script" path="res://Scripts/unique/Player.cs" id="1_4e5hf"]
 [ext_resource type="Texture2D" uid="uid://cwwhcul0o331m" path="res://Assets/player-Sheet.png" id="2_u5f10"]
-[ext_resource type="Script" path="res://Scripts/Movement.cs" id="3_cg28w"]
-[ext_resource type="Script" path="res://Composites/HealthNode.cs" id="3_ytnh2"]
-[ext_resource type="Script" path="res://Composites/hurtBox.cs" id="5_tlb63"]
+[ext_resource type="Script" path="res://Scripts/unique/Movement.cs" id="3_cg28w"]
+[ext_resource type="Script" path="res://Scripts/Composites/HealthNode.cs" id="3_ytnh2"]
+[ext_resource type="Script" path="res://Scripts/Composites/hurtBox.cs" id="5_tlb63"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_s1go2"]
 radius = 9.0
