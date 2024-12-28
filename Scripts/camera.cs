@@ -27,7 +27,6 @@ public partial class camera : Camera2D
     Vector2 randBox = new Vector2(randSingle(rand, jitness), randSingle(rand, jitness));
     shakeVector += randBox;
     randBox = new Vector2(randSingle(rand, jitness), randSingle(rand, jitness));
-
     Position = endPos + (randBox + shakeVector) * mag;
     jitness += -jitness * dampening * (float)delta;
     mag += -mag * dampening * (float)delta;
@@ -40,9 +39,9 @@ public partial class camera : Camera2D
     jitness = jitterness;
   }
 
-  public float randSingle(Random rand, float inV)
+  public float randSingle(Random rand, float mag)
   {
     float scalar = (rand.NextSingle() - .5f) * 2.0f;
-    return scalar * inV;
+    return scalar * mag;
   }
 }
