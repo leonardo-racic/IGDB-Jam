@@ -25,11 +25,7 @@ public partial class hurtBox : Area2D
   {
     foreach (string item in ignoreTags)
     {
-      foreach (string group in area.GetGroups())
-      {
-        if (group == item) //this is o(n^2) and makes me sad; lets find a way to make it o(n) or o(n * log(n)) or even better o(log(n))
-          return;
-      }
+      health.IsInGroup(item);
     }
     //from this point we know that we don't ignore them
     health.Health += -damage;
