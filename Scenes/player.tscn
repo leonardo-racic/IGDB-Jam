@@ -61,7 +61,7 @@ animations = [{
 radius = 12.595
 height = 43.19
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("Sprite", "Pivot", "TackleHitbox")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("Sprite", "Pivot", "TackleHitbox") groups=["Player"]]
 script = ExtResource("1_4e5hf")
 Sprite = NodePath("Pivot/AnimatedSprite2D")
 Pivot = NodePath("Pivot")
@@ -105,9 +105,10 @@ script = ExtResource("3_ytnh2")
 [node name="Movement" type="Node" parent="." node_paths=PackedStringArray("plr")]
 script = ExtResource("3_cg28w")
 plr = NodePath("..")
-SPEED = 90.0
-TACKLE_SPEED = 800.0
+SPEED = 30.0
+TACKLE_SPEED = 1000.0
 FRICTION = 0.93
+bounceFactor = 349.785
 
 [connection signal="area_entered" from="Pivot/Hitbox" to="Pivot/Hitbox" method="onAreaEntered"]
 [connection signal="area_entered" from="Pivot/Hurtbox" to="Pivot/Hurtbox" method="hit"]

@@ -1,0 +1,79 @@
+[gd_scene load_steps=12 format=3 uid="uid://b8ksd0iqhrowa"]
+
+[ext_resource type="Script" path="res://Scripts/unique/Enemy.cs" id="1_4g8bb"]
+[ext_resource type="Texture2D" uid="uid://d8xoni7e4v0k" path="res://Assets/stealer-Sheet.png" id="1_ov56a"]
+[ext_resource type="Script" path="res://Scripts/Composites/Hurtbox.cs" id="3_5y5tj"]
+[ext_resource type="Script" path="res://Scripts/Composites/HealthNode.cs" id="4_frcda"]
+[ext_resource type="Texture2D" uid="uid://do5wx6tafleug" path="res://Assets/icon.svg" id="5_li1t1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k06m2"]
+size = Vector2(8, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_plu8u"]
+atlas = ExtResource("1_ov56a")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2q6cq"]
+atlas = ExtResource("1_ov56a")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5cuc8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_plu8u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2q6cq")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lbfho"]
+radius = 69.7209
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_t6s4h"]
+
+[node name="Enemy" type="CharacterBody2D"]
+script = ExtResource("1_4g8bb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_k06m2")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.53, 0.53)
+sprite_frames = SubResource("SpriteFrames_5cuc8")
+
+[node name="Vision" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 6
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Vision"]
+shape = SubResource("CircleShape2D_lbfho")
+
+[node name="HurtBox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("3_5y5tj")
+health = NodePath("../Health")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_k06m2")
+
+[node name="Ray" type="ShapeCast2D" parent="."]
+shape = SubResource("CircleShape2D_t6s4h")
+target_position = Vector2(70, 0)
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("4_frcda")
+
+[node name="Icon" type="Sprite2D" parent="."]
+position = Vector2(93, -4)
+scale = Vector2(0.148438, 0.148438)
+texture = ExtResource("5_li1t1")
+
+[connection signal="body_entered" from="Vision" to="." method="objectIsInView"]
