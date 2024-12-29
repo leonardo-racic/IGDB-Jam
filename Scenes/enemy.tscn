@@ -74,7 +74,6 @@ health = NodePath("../Health")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 position = Vector2(-0.921657, 2.99539)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_ltexv")
 
 [node name="Ray" type="ShapeCast2D" parent="."]
