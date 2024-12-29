@@ -1,10 +1,12 @@
-[gd_scene load_steps=14 format=4 uid="uid://o51s4fmin34l"]
+[gd_scene load_steps=17 format=4 uid="uid://o51s4fmin34l"]
 
 [ext_resource type="PackedScene" uid="uid://doqjj6i3kg3ow" path="res://Scenes/player.tscn" id="1_4a1jc"]
+[ext_resource type="Script" path="res://Scripts/unique/MainScene.cs" id="1_4gme0"]
 [ext_resource type="Script" path="res://Scripts/unique/camera.cs" id="1_mfgub"]
 [ext_resource type="PackedScene" uid="uid://b8ksd0iqhrowa" path="res://Scenes/enemy.tscn" id="3_mcght"]
 [ext_resource type="Script" path="res://Scripts/unique/spawner.cs" id="4_mv2ye"]
 [ext_resource type="Texture2D" uid="uid://5khvxw35be0g" path="res://Assets/wall.png" id="4_oti2j"]
+[ext_resource type="Texture2D" uid="uid://iov4pc5q2xgi" path="res://Assets/blocks-Sheet.png" id="7_0fovu"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6d0xx"]
 texture = ExtResource("4_oti2j")
@@ -233,9 +235,15 @@ curve_z = SubResource("Curve_lcl7a")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hl6ks"]
 size = Vector2(193, 184)
 
-[node name="Main" type="Node2D"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0lvtp"]
+radius = 19.0
+height = 54.0
+
+[node name="Main" type="Node2D" node_paths=PackedStringArray("ChristmasTree")]
 texture_filter = 1
 position = Vector2(1, 0)
+script = ExtResource("1_4gme0")
+ChristmasTree = NodePath("ChristmasTree")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 scale = Vector2(2, 2)
@@ -271,3 +279,19 @@ main = NodePath("..")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(261, 21)
 shape = SubResource("RectangleShape2D_hl6ks")
+
+[node name="ChristmasTree" type="Node2D" parent="."]
+position = Vector2(-266, 108)
+
+[node name="Sprite2D" type="Sprite2D" parent="ChristmasTree"]
+scale = Vector2(5, 5)
+texture = ExtResource("7_0fovu")
+region_enabled = true
+region_rect = Rect2(17, 73, 30, 39)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="ChristmasTree"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ChristmasTree/StaticBody2D"]
+position = Vector2(4, 84)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_0lvtp")
