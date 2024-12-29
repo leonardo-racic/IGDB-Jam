@@ -62,6 +62,7 @@ radius = 12.595
 height = 43.19
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("Sprite", "Pivot", "TackleHitbox")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("Sprite") groups=["Player"]]
 script = ExtResource("1_4e5hf")
 Sprite = NodePath("Pivot/AnimatedSprite2D")
 Pivot = NodePath("Pivot")
@@ -111,3 +112,25 @@ FRICTION = 0.9
 
 [connection signal="area_entered" from="Pivot/Hitbox" to="Pivot/Hitbox" method="onAreaEntered"]
 [connection signal="area_entered" from="Pivot/Hurtbox" to="Pivot/Hurtbox" method="hit"]
+speed = 50.0
+FRICTION = 0.95
+bounceFactor = 2.0
+
+[node name="Hurtbox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("5_tlb63")
+health = NodePath("../Health")
+damage = 2
+
+[node name="CollisionBox" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(0, 8.595)
+rotation = -1.5708
+shape = SubResource("CapsuleShape2D_s1go2")
+
+<<<<<<< HEAD
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("6_mn3tx")
+

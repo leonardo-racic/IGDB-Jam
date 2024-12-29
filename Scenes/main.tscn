@@ -1,7 +1,9 @@
 [gd_scene load_steps=8 format=3 uid="uid://o51s4fmin34l"]
+[gd_scene load_steps=9 format=3 uid="uid://o51s4fmin34l"]
 
 [ext_resource type="PackedScene" uid="uid://doqjj6i3kg3ow" path="res://Scenes/player.tscn" id="1_4a1jc"]
 [ext_resource type="Script" path="res://Scripts/unique/camera.cs" id="1_mfgub"]
+[ext_resource type="PackedScene" uid="uid://dl76d2a720b75" path="res://Scenes/Enemy.tscn" id="3_q5m6o"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_2njpf"]
 size = Vector3(1000, 1000, 1000)
@@ -29,13 +31,18 @@ position = Vector2(1, 0)
 
 [node name="Background" type="MeshInstance2D" parent="."]
 position = Vector2(0, 64)
+position = Vector2(-37, 60)
 scale = Vector2(0.674, 0.674)
 mesh = SubResource("BoxMesh_2njpf")
 texture = SubResource("CurveXYZTexture_mbxes")
 
 [node name="Player" parent="." instance=ExtResource("1_4a1jc")]
 position = Vector2(55, 41)
+motion_mode = 1
 
 [node name="Camera2D" type="Camera2D" parent="."]
 script = ExtResource("1_mfgub")
 dampening = 1.0
+
+[node name="Enemy" parent="." instance=ExtResource("3_q5m6o")]
+position = Vector2(-221, -19)

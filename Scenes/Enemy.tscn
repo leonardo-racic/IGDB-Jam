@@ -1,4 +1,5 @@
 [gd_scene load_steps=8 format=3 uid="uid://bq6dm6a726kca"]
+[gd_scene load_steps=8 format=3 uid="uid://dl76d2a720b75"]
 
 [ext_resource type="Texture2D" uid="uid://do5wx6tafleug" path="res://Assets/icon.svg" id="1_8tkqt"]
 [ext_resource type="Script" path="res://Scripts/Composites/hurtBox.cs" id="1_k88y5"]

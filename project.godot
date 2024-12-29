@@ -24,6 +24,10 @@ window/size/viewport_height=323
 
 project/assembly_name="Meowelry"
 
+[global_group]
+
+Player="A group that only has the player"
+
 [input]
 
 move_up={
