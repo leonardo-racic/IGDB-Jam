@@ -1,4 +1,3 @@
-[gd_scene load_steps=8 format=3 uid="uid://o51s4fmin34l"]
 [gd_scene load_steps=9 format=3 uid="uid://o51s4fmin34l"]
 
 [ext_resource type="PackedScene" uid="uid://doqjj6i3kg3ow" path="res://Scenes/player.tscn" id="1_4a1jc"]
@@ -30,7 +29,6 @@ texture_filter = 1
 position = Vector2(1, 0)
 
 [node name="Background" type="MeshInstance2D" parent="."]
-position = Vector2(0, 64)
 position = Vector2(-37, 60)
 scale = Vector2(0.674, 0.674)
 mesh = SubResource("BoxMesh_2njpf")
