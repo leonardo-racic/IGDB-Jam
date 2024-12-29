@@ -27,7 +27,6 @@ public partial class Enemy : CharacterBody2D
     }
     else
       Velocity = Vector2.Zero;
-    GD.Print(Velocity);
   }
 
   public override void _PhysicsProcess(double delta)
