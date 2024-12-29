@@ -1,29 +1,28 @@
 using Godot;
-using System;
 
 public partial class Enemy : CharacterBody2D
 {
-  bool fleeing = false;
-  Node2D pl = null;
   [Export]
   public EnemyMovment movment;
   [Export]
   public float TargetDistance = 200.0f;
-  // Called when the node enters the scene tree for the first time.
-  public override void _Ready()
-  {
-  }
+  [Export]
+  public Node2D Pivot;
 
-  // Called every frame. 'delta' is the elapsed time since the previous frame.
+  private bool fleeing = false;
+  private Node2D pl = null;
+  private int PlayerCollisionID = 2;
+
   public override void _Process(double delta)
   {
     if (fleeing)
     {
       //points away
-      Vector2 away = (GlobalPosition - pl.GlobalPosition); //(away)
+      Vector2 away = GlobalPosition - pl.GlobalPosition; //(away)
       //(not towards - away)
       float mag = TargetDistance - away.Length();
       Velocity = away.Normalized() * mag * (float)delta;
+      Pivot.Scale = new Vector2(Velocity.X > 0.0f ? 1 : -1, 1);
     }
     else
       Velocity = Vector2.Zero;
@@ -36,10 +35,10 @@ public partial class Enemy : CharacterBody2D
 
   void objectIsInView(Area2D area)
   {
-    if (!area.IsInGroup("Player"))
+    if (!area.GetCollisionLayerValue(PlayerCollisionID))
       return;
     ShapeCast2D ray = GetNode<ShapeCast2D>("Ray");
-    ray.TargetPosition = (area.GlobalPosition - ray.GlobalPosition);
+    ray.TargetPosition = area.GlobalPosition - ray.GlobalPosition;
     ray.ForceShapecastUpdate();
     if (ray.GetCollisionCount() == 0)
       return;
@@ -51,6 +50,6 @@ public partial class Enemy : CharacterBody2D
 
   void objectLeftView(Area2D area)
   {
-    fleeing = !area.IsInGroup("Player");
+    fleeing = !area.GetCollisionLayerValue(PlayerCollisionID);
   }
 }

@@ -17,16 +17,11 @@ config/icon="res://Assets/icon.svg"
 
 [display]
 
-window/size/viewport_width=576
-window/size/viewport_height=323
+window/stretch/mode="viewport"
 
 [dotnet]
 
 project/assembly_name="Meowelry"
-
-[global_group]
-
-Player="The one and only"
 
 [input]
 

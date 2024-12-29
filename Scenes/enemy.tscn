@@ -6,9 +6,6 @@
 [ext_resource type="Script" path="res://Scripts/Composites/HealthNode.cs" id="4_frcda"]
 [ext_resource type="Script" path="res://Scripts/unique/EnemyMovment.cs" id="5_bl537"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_k06m2"]
-size = Vector2(8, 12)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_plu8u"]
 atlas = ExtResource("1_ov56a")
 region = Rect2(0, 0, 64, 64)
@@ -31,24 +28,31 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k06m2"]
+size = Vector2(8, 12)
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_lbfho"]
 radius = 69.7209
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_t6s4h"]
 
-[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("movment")]
+[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("movment", "Pivot")]
 scale = Vector2(2.17, 2.17)
 collision_layer = 0
 script = ExtResource("1_4g8bb")
 movment = NodePath("EnemyMovment")
+Pivot = NodePath("Pivot")
+
+[node name="Pivot" type="Node2D" parent="."]
+scale = Vector2(1, 1)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Pivot"]
+scale = Vector2(0.53, 0.53)
+sprite_frames = SubResource("SpriteFrames_5cuc8")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 2)
 shape = SubResource("RectangleShape2D_k06m2")
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2(0.53, 0.53)
-sprite_frames = SubResource("SpriteFrames_5cuc8")
 
 [node name="Vision" type="Area2D" parent="."]
 collision_layer = 0
@@ -70,7 +74,7 @@ shape = SubResource("RectangleShape2D_k06m2")
 [node name="Ray" type="ShapeCast2D" parent="."]
 shape = SubResource("CircleShape2D_t6s4h")
 target_position = Vector2(70, 0)
-collision_mask = 2
+collision_mask = 3
 collide_with_areas = true
 collide_with_bodies = false
 

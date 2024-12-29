@@ -6,7 +6,7 @@ public partial class EnemyMovment : Node
   public bool move(int stepCount, CharacterBody2D body)
   {
     Vector2 preVel = body.Velocity;
-    body.Velocity *= 1.0f / (float)stepCount;
+    body.Velocity *= 1.0f / stepCount;
     bool hit = false;
     while (stepCount-- > 0)
     {
