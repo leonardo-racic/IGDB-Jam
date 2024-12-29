@@ -1,5 +1,8 @@
+<<<<<<< HEAD
 [gd_scene load_steps=8 format=3 uid="uid://bq6dm6a726kca"]
+=======
 [gd_scene load_steps=8 format=3 uid="uid://dl76d2a720b75"]
+>>>>>>> enemyWork
 
 [ext_resource type="Texture2D" uid="uid://do5wx6tafleug" path="res://Assets/icon.svg" id="1_8tkqt"]
 [ext_resource type="Script" path="res://Scripts/Composites/hurtBox.cs" id="1_k88y5"]
@@ -23,7 +26,10 @@ collision_layer = 2
 collision_mask = 2
 script = ExtResource("1_k88y5")
 health = NodePath("../HealthNode")
+<<<<<<< HEAD
 damage = null
+=======
+>>>>>>> enemyWork
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 shape = SubResource("CircleShape2D_goeni")
