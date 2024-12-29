@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://b8ksd0iqhrowa"]
+[gd_scene load_steps=13 format=3 uid="uid://b8ksd0iqhrowa"]
 
 [ext_resource type="Script" path="res://Scripts/unique/Enemy.cs" id="1_4g8bb"]
 [ext_resource type="Texture2D" uid="uid://d8xoni7e4v0k" path="res://Assets/stealer-Sheet.png" id="1_ov56a"]
@@ -34,14 +34,18 @@ size = Vector2(8, 12)
 [sub_resource type="CircleShape2D" id="CircleShape2D_lbfho"]
 radius = 69.7209
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ltexv"]
+size = Vector2(30.4148, 33.6406)
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_t6s4h"]
 
-[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("movment", "Pivot")]
+[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("movment", "Pivot", "healthNode")]
 scale = Vector2(2.17, 2.17)
 collision_layer = 0
 script = ExtResource("1_4g8bb")
 movment = NodePath("EnemyMovment")
 Pivot = NodePath("Pivot")
+healthNode = NodePath("Health")
 
 [node name="Pivot" type="Node2D" parent="."]
 
@@ -50,10 +54,12 @@ scale = Vector2(0.53, 0.53)
 sprite_frames = SubResource("SpriteFrames_5cuc8")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0, 2)
 shape = SubResource("RectangleShape2D_k06m2")
 
 [node name="Vision" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 collision_mask = 2
 
@@ -61,16 +67,18 @@ collision_mask = 2
 shape = SubResource("CircleShape2D_lbfho")
 
 [node name="HurtBox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
-collision_layer = 4
-collision_mask = 0
+collision_layer = 0
+collision_mask = 2
 script = ExtResource("3_5y5tj")
 health = NodePath("../Health")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
-position = Vector2(0, 2)
-shape = SubResource("RectangleShape2D_k06m2")
+position = Vector2(-0.921657, 2.99539)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_ltexv")
 
 [node name="Ray" type="ShapeCast2D" parent="."]
+visible = false
 shape = SubResource("CircleShape2D_t6s4h")
 target_position = Vector2(70, 0)
 collision_mask = 3
@@ -79,7 +87,7 @@ collide_with_bodies = false
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("4_frcda")
-MaxHealth = 20.0
+MaxHealth = 1.0
 
 [node name="EnemyMovment" type="Node" parent="."]
 script = ExtResource("5_bl537")
