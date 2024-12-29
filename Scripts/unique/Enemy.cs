@@ -12,15 +12,27 @@ public partial class Enemy : CharacterBody2D
   // Called every frame. 'delta' is the elapsed time since the previous frame.
   public override void _Process(double delta)
   {
+    GD.Print(fleeing);
   }
 
-  void objectIsInView(Node2D body)
+  void objectIsInView(Area2D area)
   {
-    GD.Print("AAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+    if (!area.IsInGroup("Player"))
+      return;
     ShapeCast2D ray = GetNode<ShapeCast2D>("Ray");
-    ray.TargetPosition = (body.GlobalPosition - ray.GlobalPosition) * 1.5f;
+    Sprite2D debug = GetNode<Sprite2D>("Icon");
+    ray.TargetPosition = (area.GlobalPosition - ray.GlobalPosition);
+    debug.GlobalPosition = ray.TargetPosition + ray.GlobalPosition;
     ray.ForceShapecastUpdate();
+    if (ray.GetCollisionCount() == 0)
+      return;
     GodotObject col = ray.GetCollider(0);
-    fleeing = col.GetInstanceId() == body.GetInstanceId() && body.IsInGroup("Player");
+    fleeing = col.GetInstanceId() == area.GetInstanceId();
+  }
+
+  void objectLeftView(Area2D area)
+  {
+    if (area.IsInGroup("Player"))
+      return;
   }
 }

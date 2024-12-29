@@ -37,6 +37,7 @@ radius = 69.7209
 [sub_resource type="CircleShape2D" id="CircleShape2D_t6s4h"]
 
 [node name="Enemy" type="CharacterBody2D"]
+collision_layer = 0
 script = ExtResource("1_4g8bb")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -49,7 +50,7 @@ sprite_frames = SubResource("SpriteFrames_5cuc8")
 
 [node name="Vision" type="Area2D" parent="."]
 collision_layer = 0
-collision_mask = 6
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Vision"]
 shape = SubResource("CircleShape2D_lbfho")
@@ -67,6 +68,9 @@ shape = SubResource("RectangleShape2D_k06m2")
 [node name="Ray" type="ShapeCast2D" parent="."]
 shape = SubResource("CircleShape2D_t6s4h")
 target_position = Vector2(70, 0)
+collision_mask = 2
+collide_with_areas = true
+collide_with_bodies = false
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("4_frcda")
@@ -76,4 +80,4 @@ position = Vector2(93, -4)
 scale = Vector2(0.148438, 0.148438)
 texture = ExtResource("5_li1t1")
 
-[connection signal="body_entered" from="Vision" to="." method="objectIsInView"]
+[connection signal="area_entered" from="Vision" to="." method="objectIsInView"]

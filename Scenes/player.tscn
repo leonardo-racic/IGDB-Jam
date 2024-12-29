@@ -61,7 +61,8 @@ animations = [{
 radius = 12.595
 height = 43.19
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("Sprite", "Pivot", "TackleHitbox") groups=["Player"]]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("Sprite", "Pivot", "TackleHitbox")]
+collision_layer = 0
 script = ExtResource("1_4e5hf")
 Sprite = NodePath("Pivot/AnimatedSprite2D")
 Pivot = NodePath("Pivot")
@@ -83,7 +84,7 @@ debug_color = Color(0.877112, 0.264845, 0.55523, 0.42)
 sprite_frames = SubResource("SpriteFrames_km0qq")
 animation = &"tackle"
 
-[node name="Hurtbox" type="Area2D" parent="Pivot" node_paths=PackedStringArray("health")]
+[node name="Hurtbox" type="Area2D" parent="Pivot" node_paths=PackedStringArray("health") groups=["Player"]]
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("5_62jck")
