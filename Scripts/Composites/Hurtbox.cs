@@ -7,6 +7,7 @@ public partial class Hurtbox : Area2D
 
   public override void _Ready()
   {
+    AreaEntered += (Area2D area) => onAreaEntered(area);
     if (health == null)
       GD.PrintErr("ERROR HEALTHNODE IS INVALID ON HURTBOX PARENT NODE IS ", GetParent().GetName());
   }
