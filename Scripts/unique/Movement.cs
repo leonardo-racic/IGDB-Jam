@@ -5,7 +5,9 @@ public partial class Movement : Node
   [Export]
   public Player plr;
   [Export]
-  public float speed = 150.0f;
+  public float SPEED = 150.0f;
+  [Export]
+  public float TACKLE_SPEED = 600.0f;
   [Export]
   public float FRICTION = .5f;
   [Export]
@@ -13,11 +15,6 @@ public partial class Movement : Node
   [Export]
   public int stepCount = 20;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
   private Vector2 lastValidInputDir = Vector2.Zero;
 
   public override void _PhysicsProcess(double delta)
@@ -26,42 +23,12 @@ public partial class Movement : Node
       handleTackleMovement(delta);
     else
       handleDefaultMovement(delta);
-=======
-  public override void _PhysicsProcess(double delta)
-  {
-    handleMovement(delta);
->>>>>>> parent of 41e9a42 (Tackling logic)
-=======
-  public override void _PhysicsProcess(double delta)
-  {
-    handleMovement(delta);
->>>>>>> parent of 41e9a42 (Tackling logic)
-=======
-  public override void _PhysicsProcess(double delta)
-  {
-    handleMovement(delta);
->>>>>>> parent of 41e9a42 (Tackling logic)
-=======
-  public override void _PhysicsProcess(double delta)
-  {
-    handleMovement(delta);
->>>>>>> parent of 41e9a42 (Tackling logic)
-=======
-  public override void _PhysicsProcess(double delta)
-  {
-    handleMovement(delta);
->>>>>>> parent of 41e9a42 (Tackling logic)
     move(plr, stepCount, bounceFactor);
   }
 
-  private void handleMovement(double delta)
+  private void handleDefaultMovement(double delta)
   {
     Vector2 inputDirection = Input.GetVector("move_left", "move_right", "move_up", "move_down");
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
     plr.Velocity += inputDirection * (float)(SPEED * delta);
     plr.Velocity *= FRICTION;
     if (inputDirection != Vector2.Zero)
@@ -72,82 +39,15 @@ public partial class Movement : Node
       plr.PlayState("move");
     }
     else
-=======
-    plr.Velocity += inputDirection * (float)(speed * delta);
-    plr.Velocity *= (float)(FRICTION); //TODO: find a way to incorperate delta here so its normalized per frame rate; but _PhysicsProcess is const int framerate (i think)
-    if (inputDirection != Vector2.Zero)
-    {
-      if (inputDirection.X != 0.0f)
-=======
-    plr.Velocity += inputDirection * (float)(speed * delta);
-    plr.Velocity *= (float)(FRICTION); //TODO: find a way to incorperate delta here so its normalized per frame rate; but _PhysicsProcess is const int framerate (i think)
-    if (inputDirection != Vector2.Zero)
-    {
-      if (inputDirection.X != 0.0f)
->>>>>>> parent of 41e9a42 (Tackling logic)
-=======
-    plr.Velocity += inputDirection * (float)(speed * delta);
-    plr.Velocity *= (float)(FRICTION); //TODO: find a way to incorperate delta here so its normalized per frame rate; but _PhysicsProcess is const int framerate (i think)
-    if (inputDirection != Vector2.Zero)
-    {
-      if (inputDirection.X != 0.0f)
->>>>>>> parent of 41e9a42 (Tackling logic)
-=======
-    plr.Velocity += inputDirection * (float)(speed * delta);
-    plr.Velocity *= (float)(FRICTION); //TODO: find a way to incorperate delta here so its normalized per frame rate; but _PhysicsProcess is const int framerate (i think)
-    if (inputDirection != Vector2.Zero)
-    {
-      if (inputDirection.X != 0.0f)
->>>>>>> parent of 41e9a42 (Tackling logic)
-=======
-    plr.Velocity += inputDirection * (float)(speed * delta);
-    plr.Velocity *= (float)(FRICTION); //TODO: find a way to incorperate delta here so its normalized per frame rate; but _PhysicsProcess is const int framerate (i think)
-    if (inputDirection != Vector2.Zero)
-    {
-      if (inputDirection.X != 0.0f)
->>>>>>> parent of 41e9a42 (Tackling logic)
-        plr.Sprite.FlipH = inputDirection.X < 0.0f;
-      plr.PlayState("move");
-    }
-    else
-    {
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> parent of 41e9a42 (Tackling logic)
-=======
->>>>>>> parent of 41e9a42 (Tackling logic)
-=======
->>>>>>> parent of 41e9a42 (Tackling logic)
-=======
->>>>>>> parent of 41e9a42 (Tackling logic)
-=======
->>>>>>> parent of 41e9a42 (Tackling logic)
       plr.PlayState("idle");
   }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
   private void handleTackleMovement(double delta)
   {
     plr.Velocity = lastValidInputDir * (float)(TACKLE_SPEED * delta);
     plr.PlayState("tackle");
   }
 
-=======
->>>>>>> parent of 41e9a42 (Tackling logic)
-=======
->>>>>>> parent of 41e9a42 (Tackling logic)
-=======
->>>>>>> parent of 41e9a42 (Tackling logic)
-=======
->>>>>>> parent of 41e9a42 (Tackling logic)
-=======
->>>>>>> parent of 41e9a42 (Tackling logic)
   public bool move(CharacterBody2D body, int stepCount, float bounceFactor)
   {
     bool hit = false;
