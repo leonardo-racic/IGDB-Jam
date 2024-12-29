@@ -84,7 +84,7 @@ debug_color = Color(0.877112, 0.264845, 0.55523, 0.42)
 sprite_frames = SubResource("SpriteFrames_km0qq")
 animation = &"tackle"
 
-[node name="Hurtbox" type="Area2D" parent="Pivot" node_paths=PackedStringArray("health") groups=["Player"]]
+[node name="Hurtbox" type="Area2D" parent="Pivot" node_paths=PackedStringArray("health")]
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("5_62jck")
