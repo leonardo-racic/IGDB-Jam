@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://o51s4fmin34l"]
+[gd_scene load_steps=11 format=3 uid="uid://o51s4fmin34l"]
 
 [ext_resource type="PackedScene" uid="uid://doqjj6i3kg3ow" path="res://Scenes/player.tscn" id="1_4a1jc"]
 [ext_resource type="Script" path="res://Scripts/unique/camera.cs" id="1_mfgub"]
 [ext_resource type="PackedScene" uid="uid://b8ksd0iqhrowa" path="res://Scenes/enemy.tscn" id="3_mcght"]
+[ext_resource type="Script" path="res://Scripts/unique/spawner.cs" id="4_mv2ye"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_2njpf"]
 size = Vector3(1000, 1000, 1000)
@@ -24,6 +25,9 @@ curve_x = SubResource("Curve_81ytm")
 curve_y = SubResource("Curve_bf4oy")
 curve_z = SubResource("Curve_lcl7a")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_08ts3"]
+size = Vector2(101, 90)
+
 [node name="Main" type="Node2D"]
 texture_filter = 1
 position = Vector2(1, 0)
@@ -43,3 +47,15 @@ dampening = 1.0
 
 [node name="Enemy" parent="." instance=ExtResource("3_mcght")]
 position = Vector2(-152, 34)
+
+[node name="spawner" type="StaticBody2D" parent="." node_paths=PackedStringArray("main")]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("4_mv2ye")
+spawnCount = 10
+enemyScenePath = "res://Scenes/enemy.tscn"
+main = NodePath("..")
+
+[node name="area1" type="CollisionShape2D" parent="spawner"]
+position = Vector2(235, -111)
+shape = SubResource("RectangleShape2D_08ts3")
