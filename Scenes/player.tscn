@@ -7,6 +7,10 @@
 [ext_resource type="Script" path="res://Scripts/Composites/Hurtbox.cs" id="5_62jck"]
 [ext_resource type="Script" path="res://Scripts/Composites/Hitbox.cs" id="6_mn3tx"]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_s1go2"]
+radius = 12.595
+height = 43.19
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qw3rd"]
 radius = 20.0
 height = 54.0
@@ -57,43 +61,13 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_s1go2"]
-radius = 12.595
-height = 43.19
-
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("Sprite", "Pivot", "TackleHitbox")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("Sprite", "TackleHitbox")]
 collision_layer = 0
 script = ExtResource("1_4e5hf")
-Sprite = NodePath("Pivot/AnimatedSprite2D")
-Pivot = NodePath("Pivot")
-TackleHitbox = NodePath("Pivot/Hitbox")
+Sprite = NodePath("AnimatedSprite2D")
+TackleHitbox = NodePath("Hitbox")
 
 [node name="Pivot" type="Node2D" parent="."]
-
-[node name="Hitbox" type="Area2D" parent="Pivot"]
-collision_layer = 0
-collision_mask = 4
-script = ExtResource("6_mn3tx")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Pivot/Hitbox"]
-position = Vector2(26, -3)
-shape = SubResource("CapsuleShape2D_qw3rd")
-debug_color = Color(0.877112, 0.264845, 0.55523, 0.42)
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Pivot"]
-sprite_frames = SubResource("SpriteFrames_km0qq")
-animation = &"tackle"
-
-[node name="Hurtbox" type="Area2D" parent="Pivot" node_paths=PackedStringArray("health")]
-collision_layer = 2
-collision_mask = 0
-script = ExtResource("5_62jck")
-health = NodePath("../../Health")
-
-[node name="CollisionBox" type="CollisionShape2D" parent="Pivot/Hurtbox"]
-position = Vector2(0, 8.595)
-rotation = -1.5708
-shape = SubResource("CapsuleShape2D_s1go2")
 
 [node name="CollisionBox" type="CollisionShape2D" parent="."]
 position = Vector2(0, 13)
@@ -109,7 +83,33 @@ plr = NodePath("..")
 SPEED = 30.0
 TACKLE_SPEED = 1000.0
 FRICTION = 0.93
-bounceFactor = 5.0
+bounceFactor = 1.0
+stepCount = 3
 
-[connection signal="area_entered" from="Pivot/Hitbox" to="Pivot/Hitbox" method="onAreaEntered"]
-[connection signal="area_entered" from="Pivot/Hurtbox" to="Pivot/Hurtbox" method="hit"]
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("6_mn3tx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(26, -3)
+shape = SubResource("CapsuleShape2D_qw3rd")
+debug_color = Color(0.877112, 0.264845, 0.55523, 0.42)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_km0qq")
+animation = &"tackle"
+
+[node name="Hurtbox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("5_62jck")
+health = NodePath("../Health")
+
+[node name="CollisionBox" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(0, 8.595)
+rotation = -1.5708
+shape = SubResource("CapsuleShape2D_s1go2")
+
+[connection signal="area_entered" from="Hitbox" to="Hitbox" method="onAreaEntered"]
+[connection signal="area_entered" from="Hurtbox" to="Hurtbox" method="hit"]

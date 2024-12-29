@@ -5,8 +5,6 @@ public partial class Player : CharacterBody2D
   [Export]
   public AnimatedSprite2D Sprite;
   [Export]
-  public Node2D Pivot;
-  [Export]
   public Hitbox TackleHitbox;
 
   public bool Attacking = false;

@@ -14,6 +14,8 @@ public partial class Movement : Node
   public float bounceFactor = 350.0f;
   [Export]
   public int stepCount = 20;
+  [Export]
+  public float velocityThreshold = 2f;
 
   private Vector2 lastValidInputDir = Vector2.Zero;
 
@@ -35,7 +37,7 @@ public partial class Movement : Node
     {
       lastValidInputDir = inputDirection;
       if (inputDirection.X != 0.0f)
-        plr.Pivot.Scale = new Vector2(2 * (inputDirection.X > 0.0f ? 1 : 0) - 1, 1);
+        plr.Sprite.FlipH = inputDirection.X < 0;
       plr.PlayState("move");
     }
     else
@@ -44,14 +46,17 @@ public partial class Movement : Node
 
   private void handleTackleMovement(double delta)
   {
-    plr.Velocity = (plr.Velocity.Length() > 1f ? plr.Velocity.Normalized() : lastValidInputDir) * TACKLE_SPEED * (float)delta;
+    plr.Velocity = (plr.Velocity.Length() > velocityThreshold ? plr.Velocity.Normalized() : lastValidInputDir) * TACKLE_SPEED * (float)delta;
+    plr.TackleHitbox.Rotation = plr.Velocity.Angle();
+    if (plr.Velocity.X != 0.0f)
+      plr.Sprite.FlipH = plr.Velocity.X < 0;
     plr.PlayState("tackle");
   }
 
   public bool move(CharacterBody2D body, int stepCount, float bounceFactor)
   {
     bool hit = false;
-    Vector2 incVel = body.Velocity / stepCount;
+    Vector2 incVel = body.Velocity / (float)stepCount;
     while (stepCount-- > 0)
     {  //save on memory by avoiding a for (we save 4 bytes, less if we use a short)
       KinematicCollision2D col = body.MoveAndCollide(incVel, true);

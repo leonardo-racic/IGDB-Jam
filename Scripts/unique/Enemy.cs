@@ -8,6 +8,8 @@ public partial class Enemy : CharacterBody2D
   public float TargetDistance = 200.0f;
   [Export]
   public Node2D Pivot;
+  [Export]
+  public int stepCount = 3;
 
   private bool fleeing = false;
   private Node2D pl = null;
@@ -30,7 +32,7 @@ public partial class Enemy : CharacterBody2D
 
   public override void _PhysicsProcess(double delta)
   {
-    movment.move(10, this);
+    movment.move(stepCount, this);
   }
 
   void objectIsInView(Area2D area)

@@ -4,7 +4,7 @@ using System;
 public partial class camera : Camera2D
 {
   [Export]
-  public float dampening { get; set; } = .1f;
+  public float dampening { get; set; } = .9f;
   float mag = .1f;
   float phase = 0;
   float jitness;
