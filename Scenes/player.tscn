@@ -49,6 +49,7 @@ animations = [{
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_s1go2"]
 radius = 12.595
 height = 43.19
@@ -70,6 +71,11 @@ health = NodePath("../../Health")
 position = Vector2(0, 8.595)
 rotation = -1.5708
 shape = SubResource("CapsuleShape2D_s1go2")
+=======
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("Sprite")]
+script = ExtResource("1_4e5hf")
+Sprite = NodePath("AnimatedSprite2D")
+>>>>>>> parent of 41e9a42 (Tackling logic)
 =======
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("Sprite")]
 script = ExtResource("1_4e5hf")
@@ -124,6 +130,9 @@ shape = SubResource("CapsuleShape2D_s1go2")
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> parent of 41e9a42 (Tackling logic)
 =======
 >>>>>>> parent of 41e9a42 (Tackling logic)
 =======
