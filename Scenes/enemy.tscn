@@ -36,11 +36,12 @@ radius = 69.7209
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_t6s4h"]
 
-[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("movment")]
+[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("movment", "Pivot")]
 scale = Vector2(2.17, 2.17)
 collision_layer = 0
 script = ExtResource("1_4g8bb")
 movment = NodePath("EnemyMovment")
+Pivot = NodePath("Pivot")
 
 [node name="Pivot" type="Node2D" parent="."]
 
