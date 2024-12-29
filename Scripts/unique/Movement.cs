@@ -44,7 +44,7 @@ public partial class Movement : Node
 
   private void handleTackleMovement(double delta)
   {
-    plr.Velocity = lastValidInputDir * (float)(TACKLE_SPEED * delta);
+    plr.Velocity = (plr.Velocity.Length() > 1f ? plr.Velocity.Normalized() : lastValidInputDir) * TACKLE_SPEED * (float)delta;
     plr.PlayState("tackle");
   }
 
@@ -68,4 +68,8 @@ public partial class Movement : Node
     }
     return hit;
   }
+  //so i realize this is the player movment so we have to do some...
+  //other things for the enemy its gonna be similar but not quite the same
+  //so i don't think its worth refactoring all ^ to work with enemies;
+  //i'll just make a different script called enemyMovment or something
 }

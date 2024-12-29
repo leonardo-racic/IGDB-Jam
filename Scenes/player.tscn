@@ -109,7 +109,7 @@ plr = NodePath("..")
 SPEED = 30.0
 TACKLE_SPEED = 1000.0
 FRICTION = 0.93
-bounceFactor = 349.785
+bounceFactor = 5.0
 
 [connection signal="area_entered" from="Pivot/Hitbox" to="Pivot/Hitbox" method="onAreaEntered"]
 [connection signal="area_entered" from="Pivot/Hurtbox" to="Pivot/Hurtbox" method="hit"]

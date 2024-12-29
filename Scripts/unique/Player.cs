@@ -13,8 +13,8 @@ public partial class Player : CharacterBody2D
 
   private bool tackleDebounce = false;
 
-  private double TACKLE_DURATION = 0.25d;
-  private double TACKLE_COOLDOWN = 0.3d;
+  private double TACKLE_DURATION = 0.25;
+  private double TACKLE_COOLDOWN = 0.3;
 
   public override void _Ready()
   {
@@ -35,7 +35,7 @@ public partial class Player : CharacterBody2D
         Attacking = false;
         TackleHitbox.Monitorable = false;
 
-        await ToSignal(GetTree().CreateTimer(TACKLE_COOLDOWN), "timeout");
+        await ToSignal(GetTree().CreateTimer(TACKLE_COOLDOWN), "timeout");  //huh, i would've counted by delta but this seems much more efficient
         tackleDebounce = false;
       }
     }
