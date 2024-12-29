@@ -8,19 +8,11 @@ public partial class spawner : StaticBody2D
   [Export]
   public float spawnTime = .5f;
   [Export]
-  public string enemyScenePath;
+  public PackedScene EnemyScene;
   [Export]
   public Node2D main;
-
-  private PackedScene enmyScene;
-
+  
   private float deltaElapsed = 0.0f;
-
-  // Called when the node enters the scene tree for the first time.
-  public override void _Ready()
-  {
-    enmyScene = GD.Load<PackedScene>(enemyScenePath);
-  }
 
   // Called every frame. 'delta' is the elapsed time since the previous frame.
   public override void _Process(double delta)
@@ -47,7 +39,7 @@ public partial class spawner : StaticBody2D
       //we want to turn this into a random position
       Vector2 localPos = new Vector2(nextSingle(rand, rec.Size.X), nextSingle(rand, rec.Size.Y));
       Vector2 globalPos = localPos + target.GlobalPosition + rec.Position;
-      Node2D newEnemy = enmyScene.Instantiate() as Node2D;
+      Node2D newEnemy = EnemyScene.Instantiate() as Node2D;
       newEnemy.GlobalPosition = globalPos;
       main.AddChild(newEnemy);
       count--;

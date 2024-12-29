@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=4 uid="uid://o51s4fmin34l"]
+[gd_scene load_steps=14 format=4 uid="uid://o51s4fmin34l"]
 
 [ext_resource type="PackedScene" uid="uid://doqjj6i3kg3ow" path="res://Scenes/player.tscn" id="1_4a1jc"]
 [ext_resource type="Script" path="res://Scripts/unique/camera.cs" id="1_mfgub"]
 [ext_resource type="PackedScene" uid="uid://b8ksd0iqhrowa" path="res://Scenes/enemy.tscn" id="3_mcght"]
+[ext_resource type="Script" path="res://Scripts/unique/spawner.cs" id="4_mv2ye"]
 [ext_resource type="Texture2D" uid="uid://5khvxw35be0g" path="res://Assets/wall.png" id="4_oti2j"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6d0xx"]
@@ -208,7 +209,6 @@ terrain_set_0/mode = 0
 terrain_set_0/terrain_0/name = "Terrain 0"
 terrain_set_0/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
 sources/0 = SubResource("TileSetAtlasSource_6d0xx")
-[ext_resource type="Script" path="res://Scripts/unique/spawner.cs" id="4_mv2ye"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_2njpf"]
 size = Vector3(1000, 1000, 1000)
@@ -230,8 +230,8 @@ curve_x = SubResource("Curve_81ytm")
 curve_y = SubResource("Curve_bf4oy")
 curve_z = SubResource("Curve_lcl7a")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_08ts3"]
-size = Vector2(101, 90)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hl6ks"]
+size = Vector2(193, 184)
 
 [node name="Main" type="Node2D"]
 texture_filter = 1
@@ -255,19 +255,18 @@ position = Vector2(55, 41)
 [node name="Enemy" parent="." instance=ExtResource("3_mcght")]
 position = Vector2(-152, 34)
 
-[node name="spawner" type="StaticBody2D" parent="." node_paths=PackedStringArray("main")]
-collision_layer = 0
-collision_mask = 0
-script = ExtResource("4_mv2ye")
-spawnCount = 10
-enemyScenePath = "res://Scenes/enemy.tscn"
-main = NodePath("..")
-
-[node name="area1" type="CollisionShape2D" parent="spawner"]
-position = Vector2(235, -111)
-shape = SubResource("RectangleShape2D_08ts3")
-
 [node name="Camera2D" type="Camera2D" parent="."]
 position_smoothing_enabled = true
 position_smoothing_speed = 15.0
 script = ExtResource("1_mfgub")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." node_paths=PackedStringArray("main")]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("4_mv2ye")
+EnemyScene = ExtResource("3_mcght")
+main = NodePath("..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(261, 21)
+shape = SubResource("RectangleShape2D_hl6ks")
