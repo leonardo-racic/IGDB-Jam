@@ -58,8 +58,8 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_s1go2"]
-radius = 9.0
-height = 42.0
+radius = 12.595
+height = 43.19
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("Sprite", "Pivot", "TackleHitbox")]
 script = ExtResource("1_4e5hf")
@@ -83,6 +83,17 @@ debug_color = Color(0.877112, 0.264845, 0.55523, 0.42)
 sprite_frames = SubResource("SpriteFrames_km0qq")
 animation = &"tackle"
 
+[node name="Hurtbox" type="Area2D" parent="Pivot" node_paths=PackedStringArray("health")]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("5_62jck")
+health = NodePath("../../Health")
+
+[node name="CollisionBox" type="CollisionShape2D" parent="Pivot/Hurtbox"]
+position = Vector2(0, 8.595)
+rotation = -1.5708
+shape = SubResource("CapsuleShape2D_s1go2")
+
 [node name="CollisionBox" type="CollisionShape2D" parent="."]
 position = Vector2(0, 13)
 rotation = -1.5708
@@ -94,17 +105,9 @@ script = ExtResource("3_ytnh2")
 [node name="Movement" type="Node" parent="." node_paths=PackedStringArray("plr")]
 script = ExtResource("3_cg28w")
 plr = NodePath("..")
-
-[node name="Hurtbox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
-collision_layer = 2
-collision_mask = 0
-script = ExtResource("5_62jck")
-health = NodePath("../Health")
-
-[node name="CollisionBox" type="CollisionShape2D" parent="Hurtbox"]
-position = Vector2(0, 8.595)
-rotation = -1.5708
-shape = SubResource("CapsuleShape2D_s1go2")
+SPEED = 100.0
+TACKLE_SPEED = 700.0
+FRICTION = 0.9
 
 [connection signal="area_entered" from="Pivot/Hitbox" to="Pivot/Hitbox" method="onAreaEntered"]
-[connection signal="area_entered" from="Hurtbox" to="Hurtbox" method="hit"]
+[connection signal="area_entered" from="Pivot/Hurtbox" to="Pivot/Hurtbox" method="hit"]
