@@ -11,7 +11,7 @@ public partial class spawner : StaticBody2D
   public PackedScene EnemyScene;
   [Export]
   public Node2D main;
-  
+
   private float deltaElapsed = 0.0f;
 
   // Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -27,7 +27,7 @@ public partial class spawner : StaticBody2D
 
   public void spawnEnemies(int count)
   {
-    while (count >= 0)
+    while (count > 0)
     {
       var areas = GetChildren();
       Random rand = new Random();

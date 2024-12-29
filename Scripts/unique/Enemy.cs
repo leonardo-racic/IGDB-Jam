@@ -9,6 +9,8 @@ public partial class Enemy : CharacterBody2D
   [Export]
   public Node2D Pivot;
   [Export]
+  public int stepCount = 3;
+  [Export]
   public HealthNode healthNode;
 
   private bool fleeing = false;
@@ -37,7 +39,7 @@ public partial class Enemy : CharacterBody2D
 
   public override void _PhysicsProcess(double delta)
   {
-    movment.move(10, this);
+    movment.move(stepCount, this);
   }
 
   void objectIsInView(Area2D area)
