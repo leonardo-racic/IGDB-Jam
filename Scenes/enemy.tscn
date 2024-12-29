@@ -1,10 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://b8ksd0iqhrowa"]
+[gd_scene load_steps=11 format=3 uid="uid://b8ksd0iqhrowa"]
 
 [ext_resource type="Script" path="res://Scripts/unique/Enemy.cs" id="1_4g8bb"]
 [ext_resource type="Texture2D" uid="uid://d8xoni7e4v0k" path="res://Assets/stealer-Sheet.png" id="1_ov56a"]
 [ext_resource type="Script" path="res://Scripts/Composites/Hurtbox.cs" id="3_5y5tj"]
 [ext_resource type="Script" path="res://Scripts/Composites/HealthNode.cs" id="4_frcda"]
-[ext_resource type="Texture2D" uid="uid://do5wx6tafleug" path="res://Assets/icon.svg" id="5_li1t1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k06m2"]
 size = Vector2(8, 12)
@@ -37,6 +36,7 @@ radius = 69.7209
 [sub_resource type="CircleShape2D" id="CircleShape2D_t6s4h"]
 
 [node name="Enemy" type="CharacterBody2D"]
+scale = Vector2(2.17, 2.17)
 collision_layer = 0
 script = ExtResource("1_4g8bb")
 
@@ -75,9 +75,5 @@ collide_with_bodies = false
 [node name="Health" type="Node" parent="."]
 script = ExtResource("4_frcda")
 
-[node name="Icon" type="Sprite2D" parent="."]
-position = Vector2(93, -4)
-scale = Vector2(0.148438, 0.148438)
-texture = ExtResource("5_li1t1")
-
 [connection signal="area_entered" from="Vision" to="." method="objectIsInView"]
+[connection signal="area_exited" from="Vision" to="." method="objectLeftView"]

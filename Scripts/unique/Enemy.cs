@@ -22,7 +22,6 @@ public partial class Enemy : CharacterBody2D
     ShapeCast2D ray = GetNode<ShapeCast2D>("Ray");
     Sprite2D debug = GetNode<Sprite2D>("Icon");
     ray.TargetPosition = (area.GlobalPosition - ray.GlobalPosition);
-    debug.GlobalPosition = ray.TargetPosition + ray.GlobalPosition;
     ray.ForceShapecastUpdate();
     if (ray.GetCollisionCount() == 0)
       return;
@@ -32,7 +31,6 @@ public partial class Enemy : CharacterBody2D
 
   void objectLeftView(Area2D area)
   {
-    if (area.IsInGroup("Player"))
-      return;
+    fleeing = !area.IsInGroup("Player");
   }
 }
