@@ -52,7 +52,7 @@ public partial class camera : Camera2D
     Vector2 randBox = new Vector2(randSingle(rand, jitness), randSingle(rand, jitness));
     shakeVector += randBox;
     randBox = new Vector2(randSingle(rand, jitness), randSingle(rand, jitness));
-    Position = endPos + (randBox + shakeVector) * mag;
+    Position = endPos + (randBox * mag) + shakeVector;
     jitness += -jitness * dampening * (float)delta;
     mag += -mag * dampening * (float)delta;
   }
@@ -60,14 +60,14 @@ public partial class camera : Camera2D
   public void applyScreenShake(float magnitude, float dirRads, float jitterness)
   {
     mag += magnitude;
-    shakeVector = Vector2.FromAngle(dirRads);  //thers a function for that :O
+    shakeVector = Vector2.FromAngle(dirRads) * mag;  //thers a function for that :O
     jitness = jitness + jitterness;
   }
 
   public void setScreenShake(float magnitude, float dirRads, float jitterness)
   {
     mag = magnitude;
-    shakeVector = Vector2.FromAngle(dirRads);
+    shakeVector = Vector2.FromAngle(dirRads) * mag;
     jitness = jitterness;
   }
 
