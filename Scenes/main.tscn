@@ -247,20 +247,20 @@ load_path = "res://.godot/imported/blocks-Sheet.png-e9ac73189fd5e6199b280c029ad3
 height = 37.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fdhin"]
-radius = 5.5
+radius = 4.0
 height = 21.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hl6ks"]
-size = Vector2(193, 184)
+size = Vector2(375.5, 318)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0lvtp"]
 radius = 19.0
 height = 54.0
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_tmnjj"]
-vertices = PackedVector2Array(758, -342, 758, 406, 1.9375, 383.391, -212.719, 213.578, -214, 186.719, -214, 155, 22, -329.719, 22, -342, -769.953, 3, -790, -342, -11.7734, -342, -300, 155, -744.93, 13.7188, 15, 406, 15, 402.969, -32.75, 406, -790, 406, -790, 48, -759.359, 48, -790, 3, -17.3984, 385.539, -275.227, 225, -300, 207.109, -232.297, 225)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6), PackedInt32Array(6, 7, 0), PackedInt32Array(8, 9, 10, 6, 5, 11, 12), PackedInt32Array(1, 13, 14), PackedInt32Array(15, 16, 17, 18), PackedInt32Array(8, 19, 9), PackedInt32Array(20, 15, 18, 12, 21), PackedInt32Array(12, 11, 22), PackedInt32Array(1, 14, 2), PackedInt32Array(3, 2, 20, 23), PackedInt32Array(21, 23, 20), PackedInt32Array(12, 22, 21)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-800, -352, -800, 416, 768, 416, 768, -352)])
+vertices = PackedVector2Array(-467.68, -345.648, -21.2969, -345.469, 22, -329.719, 782, 14, 730, 14, -759.109, 2.67188, -485.344, -331.523, 15, 426, 1010.29, 545, -1056.21, 545, -9.9375, 426, 856.422, -426.18, 782, 52.8125, -254.672, 108, -256.141, 102.352, 730, 39.8125, -214, 160.617, -233.094, 143, -35.4531, 409.602, 15, 402.969, 22, -362, -520.039, -345.711, -826.211, 4.35156, -889.539, -463.812, -18.3906, -362, -212.719, 213.578, -214, 186.719, 1.9375, 383.391, -17.3984, 385.539, -256.141, 113.648, -276.172, 143, -260.352, 117.859, -266, 119.328, -271.648, 117.859, -483.781, -364.453, -767.688, 40.4531, -764.219, 23.1094, -266, 96.6719, -232.297, 225, -275.227, 225, -300, 207.109, -300, 159.82, -811.789, 43.4922, -275.859, 113.648, -517.75, -361.211, -277.328, 108, -275.859, 102.352, -271.648, 98.1406, -260.352, 98.1406)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6), PackedInt32Array(7, 8, 9, 10), PackedInt32Array(11, 8, 12, 3), PackedInt32Array(13, 14, 15, 12, 16, 17), PackedInt32Array(18, 10, 9), PackedInt32Array(12, 8, 7, 19), PackedInt32Array(11, 3, 2, 20), PackedInt32Array(21, 6, 5, 22, 23), PackedInt32Array(23, 11, 20, 24), PackedInt32Array(25, 26, 16, 12, 27, 28), PackedInt32Array(29, 13, 17), PackedInt32Array(29, 17, 30, 31), PackedInt32Array(32, 31, 30), PackedInt32Array(33, 32, 30), PackedInt32Array(23, 24, 1, 34), PackedInt32Array(35, 36, 5, 4, 15, 37), PackedInt32Array(12, 19, 27), PackedInt32Array(25, 28, 18, 38), PackedInt32Array(38, 18, 9, 39), PackedInt32Array(40, 39, 9), PackedInt32Array(41, 40, 9, 42, 35), PackedInt32Array(43, 33, 30, 41, 35), PackedInt32Array(1, 0, 34), PackedInt32Array(23, 34, 44), PackedInt32Array(23, 44, 21), PackedInt32Array(9, 23, 22), PackedInt32Array(9, 22, 42), PackedInt32Array(45, 43, 35), PackedInt32Array(46, 45, 35), PackedInt32Array(47, 46, 35), PackedInt32Array(15, 14, 48), PackedInt32Array(37, 47, 35), PackedInt32Array(37, 15, 48)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-898, -474, -1068, 555, 1022, 555, 865, -436)])
 
 [node name="Main" type="Node2D" node_paths=PackedStringArray("ChristmasTree")]
 texture_filter = 1
@@ -288,6 +288,7 @@ scale = Vector2(2, 2)
 
 [node name="UpperDoor" type="Node2D" parent="Doors"]
 position = Vector2(0.5, -188)
+metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Doors/UpperDoor"]
 texture = ExtResource("7_0fovu")
@@ -296,6 +297,19 @@ region_rect = Rect2(48, 32, 16, 32)
 
 [node name="Marker2D" type="Marker2D" parent="Doors/UpperDoor"]
 position = Vector2(5, 13)
+
+[node name="UpperDoor2" type="Node2D" parent="Doors"]
+position = Vector2(0.5, -188)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Doors/UpperDoor2"]
+position = Vector2(-249, 0)
+texture = ExtResource("7_0fovu")
+region_enabled = true
+region_rect = Rect2(48, 32, 16, 32)
+
+[node name="Marker2D" type="Marker2D" parent="Doors/UpperDoor2"]
+position = Vector2(-238.5, 13)
 
 [node name="LeftDoor" type="StaticBody2D" parent="Doors"]
 position = Vector2(-398, 0)
@@ -310,7 +324,22 @@ region_rect = Rect2(64, 32, 16, 32)
 shape = SubResource("CapsuleShape2D_4x11r")
 
 [node name="Marker2D" type="Marker2D" parent="Doors/LeftDoor"]
-position = Vector2(0, -6.5)
+position = Vector2(19, 2.5)
+
+[node name="RightDoor" type="StaticBody2D" parent="Doors"]
+position = Vector2(376, 0)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Doors/RightDoor"]
+texture = SubResource("CompressedTexture2D_ucosi")
+region_enabled = true
+region_rect = Rect2(64, 32, 16, 32)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/RightDoor"]
+shape = SubResource("CapsuleShape2D_4x11r")
+
+[node name="Marker2D" type="Marker2D" parent="Doors/RightDoor"]
+position = Vector2(-16.5, 4)
 
 [node name="DownDoor" type="StaticBody2D" parent="Doors"]
 position = Vector2(0, 192.5)
@@ -326,28 +355,26 @@ rotation = 1.5708
 shape = SubResource("CapsuleShape2D_fdhin")
 
 [node name="Marker2D" type="Marker2D" parent="Doors/DownDoor"]
-position = Vector2(8, 13)
+position = Vector2(9.5, 4.5)
 
 [node name="Player" parent="." instance=ExtResource("1_4a1jc")]
 position = Vector2(162, 124)
-
-[node name="Enemy" parent="." instance=ExtResource("3_mcght")]
-position = Vector2(-361, 61)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position_smoothing_enabled = true
 position_smoothing_speed = 15.0
 script = ExtResource("1_mfgub")
 
-[node name="StaticBody2D" type="StaticBody2D" parent="." node_paths=PackedStringArray("main")]
+[node name="Spawner" type="StaticBody2D" parent="." node_paths=PackedStringArray("main")]
 collision_layer = 0
 collision_mask = 0
 script = ExtResource("4_mv2ye")
+spawnCount = 1
 EnemyScene = ExtResource("3_mcght")
-main = NodePath("..")
+main = NodePath("../Enemies")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(261, 21)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spawner"]
+position = Vector2(-459, -195)
 shape = SubResource("RectangleShape2D_hl6ks")
 disabled = true
 
@@ -379,7 +406,7 @@ position = Vector2(-24, 109)
 position = Vector2(30, 112)
 
 [node name="Root4" type="Marker2D" parent="ChristmasTree/Markers"]
-position = Vector2(40, 99)
+position = Vector2(52, 101)
 
 [node name="Root5" type="Marker2D" parent="ChristmasTree/Markers"]
 position = Vector2(49, 80)
@@ -387,24 +414,50 @@ position = Vector2(49, 80)
 [node name="Root6" type="Marker2D" parent="ChristmasTree/Markers"]
 position = Vector2(-40, 83)
 
+[node name="Root7" type="Marker2D" parent="ChristmasTree/Markers"]
+position = Vector2(-48, 56)
+
+[node name="Root8" type="Marker2D" parent="ChristmasTree/Markers"]
+position = Vector2(-34, 41)
+
+[node name="Root9" type="Marker2D" parent="ChristmasTree/Markers"]
+position = Vector2(-7, 34)
+
+[node name="Root10" type="Marker2D" parent="ChristmasTree/Markers"]
+position = Vector2(37, 34)
+
+[node name="Root11" type="Marker2D" parent="ChristmasTree/Markers"]
+position = Vector2(46, 58)
+
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
-visible = false
 position = Vector2(-5, 0)
 navigation_polygon = SubResource("NavigationPolygon_tmnjj")
 
 [node name="ChristmasTree" type="NavigationObstacle2D" parent="NavigationRegion2D"]
 position = Vector2(-266, 108)
-vertices = PackedVector2Array(-24, 94, -6, 107, 31, 107, 43, 100, 42, 79, 42, 57, -24, 57)
+radius = 1.0
+vertices = PackedVector2Array(-24, 94, -6, 107, 31, 107, 43, 100, 42, 79, 42, 57, 29, 45, -7, 45, -24, 57)
 affect_navigation_mesh = true
+avoidance_enabled = false
 
 [node name="LeftDoor" type="NavigationObstacle2D" parent="NavigationRegion2D"]
-vertices = PackedVector2Array(-796, 38, -766, 38, -758, 19, -772, 13, -795, 13)
+vertices = PackedVector2Array(-805, 33, -776, 31, -774, 21, -772, 13, -812, 14)
 affect_navigation_mesh = true
 
 [node name="UpperDoor" type="NavigationObstacle2D" parent="NavigationRegion2D"]
 vertices = PackedVector2Array(-10, -352, 12, -352, 12, -344)
 affect_navigation_mesh = true
 
+[node name="UpperDoor2" type="NavigationObstacle2D" parent="NavigationRegion2D"]
+vertices = PackedVector2Array(-509, -352, -487, -343, -482, -347, -488, -354)
+affect_navigation_mesh = true
+
 [node name="LowerDoor" type="NavigationObstacle2D" parent="NavigationRegion2D"]
 vertices = PackedVector2Array(5, 416, -7, 416, -21, 407, -12, 395, -3, 394, 5, 406)
 affect_navigation_mesh = true
+
+[node name="RightDoor" type="NavigationObstacle2D" parent="NavigationRegion2D"]
+vertices = PackedVector2Array(740, 32, 772, 40, 772, 24, 740, 24)
+affect_navigation_mesh = true
+
+[node name="Enemies" type="Node2D" parent="."]

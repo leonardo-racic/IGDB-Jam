@@ -13,7 +13,8 @@ public partial class EnemyMovment : Node
 
   public override void _Ready()
   {
-    Node2D markers = (GetTree().CurrentScene as MainScene).ChristmasTree.GetNode<Node2D>("Markers");
+    MainScene scene = GetTree().CurrentScene as MainScene;
+    Node2D markers = scene.ChristmasTree.GetNode<Node2D>("Markers");
     int childIndex = new Random().Next(markers.GetChildCount());
     Marker2D target = markers.GetChild<Marker2D>(childIndex);
     e.Nav.SetDeferred("target_position", target.GlobalPosition);
@@ -23,13 +24,16 @@ public partial class EnemyMovment : Node
     {
       if (e.Nav.TargetPosition == target.GlobalPosition)
       {
-        Node2D doors = GetTree().CurrentScene.GetNode<Node2D>("Doors");
+        e.Hand.Play("gift");
+        Node2D doors = scene.GetNode<Node2D>("Doors");
         int doorIndex = new Random().Next(doors.GetChildCount());
         Node2D door = doors.GetChild<Node2D>(doorIndex);
-        e.Nav.TargetPosition = door.GlobalPosition;
+        Marker2D doorMarker = door.GetNode<Marker2D>("Marker2D");
+        e.Nav.TargetPosition = doorMarker.GlobalPosition;
       }
       else
       {
+        scene.OnRobberEvaded(e);
       }
     };
   }
@@ -37,7 +41,6 @@ public partial class EnemyMovment : Node
   public override void _PhysicsProcess(double delta)
   {
     Vector2 goal = e.Nav.GetNextPathPosition();
-    GD.Print(goal);
     Vector2 direction = e.GlobalPosition.DirectionTo(goal);
     e.Velocity = e.Velocity.Lerp(direction * SPEED, ACCEL * (float)delta);
     if (goal.X != 0.0f)

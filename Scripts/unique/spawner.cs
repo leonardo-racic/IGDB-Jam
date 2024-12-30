@@ -11,6 +11,8 @@ public partial class spawner : StaticBody2D
   public PackedScene EnemyScene;
   [Export]
   public Node2D main;
+  [Export]
+  public int MaxEnemyCount = 5;
 
   private float deltaElapsed = 0.0f;
 
@@ -27,7 +29,7 @@ public partial class spawner : StaticBody2D
 
   public void spawnEnemies(int count)
   {
-    while (count > 0)
+    while (count > 0 && main.GetChildCount() < MaxEnemyCount)
     {
       var areas = GetChildren();
       Random rand = new Random();
