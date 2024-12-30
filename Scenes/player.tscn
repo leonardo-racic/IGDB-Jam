@@ -66,6 +66,8 @@ collision_layer = 0
 script = ExtResource("1_4e5hf")
 Sprite = NodePath("AnimatedSprite2D")
 TackleHitbox = NodePath("Hitbox")
+tackleShakeMag = 5.0
+tackleShakeJitness = 1.0
 
 [node name="Pivot" type="Node2D" parent="."]
 

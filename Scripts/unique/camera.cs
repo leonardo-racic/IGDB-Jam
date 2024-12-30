@@ -8,11 +8,15 @@ public partial class camera : Camera2D
   [Export]
   public Player plr { get; set; }
   [Export]
-  public float followDistance { get; set; } = 250.0f;
+  public float restingRadius { get; set; } = 250.0f;
+  [Export]
+  public Vector2 restingPos { get; set; } = Vector2.Zero;
   [Export]
   public float transitionSpeed { get; set; } = 0.02f;
   [Export]
-  public Vector2 restingPos { get; set; } = Vector2.Zero;
+  public float outsideAreaShakeMag { get; set; } = 2;
+  [Export]
+  public float outsideAreaShakeJit { get; set; } = 2;
 
   public bool transitioningToPlayer;
 
@@ -33,14 +37,15 @@ public partial class camera : Camera2D
   public override void _Process(double delta)
   {
     //step one git if the player is far away
-    transitioningToPlayer = plr.GlobalPosition.Length() >= followDistance;
+    transitioningToPlayer = plr.GlobalPosition.DistanceTo(restingPos) > restingRadius;
     if (transitioningToPlayer)
       endPos += (plr.GlobalPosition - endPos) * transitionSpeed;
     else
       endPos += (restingPos - endPos) * transitionSpeed;
 
     if (Input.IsActionJustPressed("space") || transitioningToPlayer)
-      applyScreenShake(2, plr.Position.Angle(), 1);
+      if (mag <= outsideAreaShakeMag)
+        setScreenShake(outsideAreaShakeMag, plr.Position.Angle(), outsideAreaShakeJit);
     //i was gonna do some trig stuff
     //but this is too dumb to ignore
     //(its 1:45 am btw)
@@ -52,10 +57,17 @@ public partial class camera : Camera2D
     mag += -mag * dampening * (float)delta;
   }
 
-  public void applyScreenShake(float magnitude, float dirRads, int jitterness)
+  public void applyScreenShake(float magnitude, float dirRads, float jitterness)
+  {
+    mag += magnitude;
+    shakeVector = Vector2.FromAngle(dirRads);  //thers a function for that :O
+    jitness = jitness + jitterness;
+  }
+
+  public void setScreenShake(float magnitude, float dirRads, float jitterness)
   {
     mag = magnitude;
-    shakeVector = Vector2.FromAngle(dirRads);  //thers a function for that :O
+    shakeVector = Vector2.FromAngle(dirRads);
     jitness = jitterness;
   }
 

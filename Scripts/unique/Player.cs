@@ -6,6 +6,12 @@ public partial class Player : CharacterBody2D
   public AnimatedSprite2D Sprite;
   [Export]
   public Hitbox TackleHitbox;
+  [Export]
+  public float tackleShakeMag;
+  [Export]
+  public float tackleShakeJitness;
+  [Signal]
+  public delegate void sendScreenShakeEventHandler(float mag, float dir, float jitness);
 
   public bool Attacking = false;
 
@@ -28,6 +34,8 @@ public partial class Player : CharacterBody2D
         tackleDebounce = true;
         Attacking = true;
         TackleHitbox.Monitorable = true;
+
+        EmitSignal(nameof(sendScreenShake), tackleShakeMag, Velocity.Angle(), tackleShakeJitness);
 
         await ToSignal(GetTree().CreateTimer(TACKLE_DURATION), "timeout");
         Attacking = false;
