@@ -1,4 +1,5 @@
 using Godot;
+using System;
 
 public partial class EnemyMovment : Node
 {
@@ -11,7 +12,10 @@ public partial class EnemyMovment : Node
 
   public override void _Ready()
   {
-    e.Nav.SetDeferred("target_position", (GetTree().CurrentScene as MainScene).ChristmasTree.GlobalPosition);
+    Node2D markers = (GetTree().CurrentScene as MainScene).ChristmasTree.GetNode<Node2D>("Markers");
+    int childIndex = new Random().Next(markers.GetChildCount());
+    e.Nav.SetDeferred("target_position", markers.GetChild<Marker2D>(childIndex).GlobalPosition);
+    e.Nav.NavigationFinished += () => GD.Print("FINISHED NAV");
   }
 
   public override void _PhysicsProcess(double delta)

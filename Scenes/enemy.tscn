@@ -94,6 +94,7 @@ script = ExtResource("5_bl537")
 e = NodePath("..")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+target_desired_distance = 25.0
 avoidance_enabled = true
 debug_enabled = true
 

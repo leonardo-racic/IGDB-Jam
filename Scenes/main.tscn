@@ -326,7 +326,7 @@ position = Vector2(8, 13)
 position = Vector2(55, 41)
 
 [node name="Enemy" parent="." instance=ExtResource("3_mcght")]
-position = Vector2(-610, -211)
+position = Vector2(-378, 60)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position_smoothing_enabled = true
@@ -361,5 +361,26 @@ position = Vector2(4, 84)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_0lvtp")
 
-[node name="Root" type="Marker2D" parent="ChristmasTree"]
-position = Vector2(4, 84)
+[node name="Markers" type="Node2D" parent="ChristmasTree"]
+
+[node name="Root" type="Marker2D" parent="ChristmasTree/Markers"]
+position = Vector2(4, 103)
+
+[node name="Root2" type="Marker2D" parent="ChristmasTree/Markers"]
+position = Vector2(-6, 103)
+
+[node name="Root3" type="Marker2D" parent="ChristmasTree/Markers"]
+position = Vector2(14, 103)
+
+[node name="Root4" type="Marker2D" parent="ChristmasTree/Markers"]
+position = Vector2(25, 98)
+
+[node name="Root5" type="Marker2D" parent="ChristmasTree/Markers"]
+position = Vector2(31, 89)
+
+[node name="Root6" type="Marker2D" parent="ChristmasTree/Markers"]
+position = Vector2(-23, 89)
+
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="ChristmasTree"]
+vertices = PackedVector2Array(-22, 82, -19, 95, -11, 100, 16, 99, 26, 88, 64, -24, -235, 14)
+affect_navigation_mesh = true
