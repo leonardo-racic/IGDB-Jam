@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://doqjj6i3kg3ow"]
+[gd_scene load_steps=15 format=3 uid="uid://doqjj6i3kg3ow"]
 
 [ext_resource type="Script" path="res://Scripts/unique/Player.cs" id="1_4e5hf"]
 [ext_resource type="Texture2D" uid="uid://cwwhcul0o331m" path="res://Assets/player-Sheet.png" id="2_u5f10"]
@@ -6,14 +6,6 @@
 [ext_resource type="Script" path="res://Scripts/Composites/HealthNode.cs" id="3_ytnh2"]
 [ext_resource type="Script" path="res://Scripts/Composites/Hurtbox.cs" id="5_62jck"]
 [ext_resource type="Script" path="res://Scripts/Composites/Hitbox.cs" id="6_mn3tx"]
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_s1go2"]
-radius = 12.595
-height = 43.19
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qw3rd"]
-radius = 20.0
-height = 54.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xis2n"]
 atlas = ExtResource("2_u5f10")
@@ -61,20 +53,34 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_iwowt"]
+radius = 5.99998
+height = 34.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qw3rd"]
+radius = 20.0
+height = 54.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_s1go2"]
+radius = 12.595
+height = 43.19
+
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("Sprite", "TackleHitbox")]
-collision_layer = 0
+collision_layer = 2
 script = ExtResource("1_4e5hf")
 Sprite = NodePath("AnimatedSprite2D")
 TackleHitbox = NodePath("Hitbox")
 tackleShakeMag = 5.0
 tackleShakeJitness = 1.0
 
-[node name="Pivot" type="Node2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_km0qq")
+animation = &"idle"
 
 [node name="CollisionBox" type="CollisionShape2D" parent="."]
-position = Vector2(0, 13)
+position = Vector2(0, 16)
 rotation = -1.5708
-shape = SubResource("CapsuleShape2D_s1go2")
+shape = SubResource("CapsuleShape2D_iwowt")
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("3_ytnh2")
@@ -98,12 +104,9 @@ position = Vector2(26, -3)
 shape = SubResource("CapsuleShape2D_qw3rd")
 debug_color = Color(0.877112, 0.264845, 0.55523, 0.42)
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_km0qq")
-animation = &"tackle"
-
 [node name="Hurtbox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
-collision_layer = 0
+visible = false
+collision_layer = 2
 collision_mask = 4
 script = ExtResource("5_62jck")
 health = NodePath("../Health")

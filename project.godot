@@ -13,10 +13,11 @@ config_version=5
 config/name="Meowelry"
 run/main_scene="res://Scenes/main.tscn"
 config/features=PackedStringArray("4.3", "C#", "GL Compatibility")
-config/icon="res://Assets/icon.svg"
 
 [display]
 
+window/size/viewport_width=1728
+window/size/viewport_height=972
 window/stretch/mode="viewport"
 
 [dotnet]

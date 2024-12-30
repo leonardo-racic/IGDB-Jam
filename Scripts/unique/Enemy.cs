@@ -4,6 +4,8 @@ public partial class Enemy : CharacterBody2D
 {
   [Export]
   public EnemyMovment movment;
+  [Export] // used by EnemyMovment
+  public NavigationAgent2D Nav;
   [Export]
   public float TargetDistance = 200.0f;
   [Export]
@@ -12,6 +14,10 @@ public partial class Enemy : CharacterBody2D
   public int stepCount = 3;
   [Export]
   public HealthNode healthNode;
+  [Export]
+  public AnimatedSprite2D Hand;
+  [Export]
+  public AnimatedSprite2D Sprite;
 
   private bool fleeing = false;
   private Node2D pl = null;
@@ -20,6 +26,8 @@ public partial class Enemy : CharacterBody2D
     public override void _Ready()
     {
       healthNode.Dead += () => QueueFree();
+      Sprite.Play("default");
+      Hand.Play("hand");
     }
 
     public override void _Process(double delta)
