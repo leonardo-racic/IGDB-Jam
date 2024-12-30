@@ -5,7 +5,16 @@ public partial class camera : Camera2D
 {
   [Export]
   public float dampening { get; set; } = .9f;
-  float mag = .1f;
+  [Export]
+  public Player plr { get; set; }
+  [Export]
+  public float followDistance { get; set; } = 250.0f;
+  [Export]
+  public float transitionSpeed { get; set; } = 0.02f;
+
+  public bool transitioningToPlayer;
+
+  float mag = .0f;
   float phase = 0;
   float jitness;
   Vector2 shakeVector = Vector2.Zero;
@@ -14,13 +23,22 @@ public partial class camera : Camera2D
   // Called when the node enters the scene tree for the first time.
   public override void _Ready()
   {
+    if (plr == null)
+      GD.PrintErr("Error camera Player target is not set");
   }
 
   // Called every frame. 'delta' is the elapsed time since the previous frame.
   public override void _Process(double delta)
   {
-    if (Input.IsActionJustPressed("space"))
-      applyScreenShake(9, 0, 1);
+    //step one git if the player is far away
+    transitioningToPlayer = plr.GlobalPosition.Length() >= followDistance;
+    if (transitioningToPlayer)
+      endPos += (plr.GlobalPosition - endPos) * transitionSpeed;
+    else
+      endPos += (Vector2.Zero - endPos) * transitionSpeed;
+
+    if (Input.IsActionJustPressed("space") || transitioningToPlayer)
+      applyScreenShake(2, plr.Position.Angle(), 1);
     //i was gonna do some trig stuff
     //but this is too dumb to ignore
     //(its 1:45 am btw)
