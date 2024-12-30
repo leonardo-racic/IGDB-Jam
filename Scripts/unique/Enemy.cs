@@ -82,7 +82,7 @@ public partial class Enemy : CharacterBody2D
     while (jewelDropCount > 0)
     {
       Node2D instance = jewelScene.Instantiate() as Node2D;
-      main.AddChild(instance as Node);
+      main.CallDeferred("add_child", instance);
       instance.Position = Vector2.Zero;
       jewelDropCount--;
     }
