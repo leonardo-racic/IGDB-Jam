@@ -70,8 +70,6 @@ collision_layer = 2
 script = ExtResource("1_4e5hf")
 Sprite = NodePath("AnimatedSprite2D")
 TackleHitbox = NodePath("Hitbox")
-tackleShakeMag = 5.0
-tackleShakeJitness = 1.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_km0qq")
