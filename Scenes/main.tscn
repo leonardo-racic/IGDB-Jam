@@ -359,8 +359,6 @@ position = Vector2(9.5, 4.5)
 
 [node name="Player" parent="." instance=ExtResource("1_4a1jc")]
 position = Vector2(162, 124)
-tackleShakeMag = 0.0
-tackleShakeJitness = 0.0
 
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("plr")]
 position_smoothing_speed = 15.0
@@ -464,3 +462,5 @@ vertices = PackedVector2Array(740, 32, 772, 40, 772, 24, 740, 24)
 affect_navigation_mesh = true
 
 [node name="Enemies" type="Node2D" parent="."]
+
+[connection signal="sendScreenShake" from="Player" to="Camera2D" method="applyScreenShake"]
