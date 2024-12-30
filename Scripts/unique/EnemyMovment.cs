@@ -1,4 +1,5 @@
 using Godot;
+using Godot.Collections;
 using System;
 
 public partial class EnemyMovment : Node
@@ -14,14 +15,33 @@ public partial class EnemyMovment : Node
   {
     Node2D markers = (GetTree().CurrentScene as MainScene).ChristmasTree.GetNode<Node2D>("Markers");
     int childIndex = new Random().Next(markers.GetChildCount());
-    e.Nav.SetDeferred("target_position", markers.GetChild<Marker2D>(childIndex).GlobalPosition);
-    e.Nav.NavigationFinished += () => GD.Print("FINISHED NAV");
+    Marker2D target = markers.GetChild<Marker2D>(childIndex);
+    e.Nav.SetDeferred("target_position", target.GlobalPosition);
+
+    // main path logic
+    e.Nav.NavigationFinished += () =>
+    {
+      if (e.Nav.TargetPosition == target.GlobalPosition)
+      {
+        Node2D doors = GetTree().CurrentScene.GetNode<Node2D>("Doors");
+        int doorIndex = new Random().Next(doors.GetChildCount());
+        Node2D door = doors.GetChild<Node2D>(doorIndex);
+        e.Nav.TargetPosition = door.GlobalPosition;
+      }
+      else
+      {
+      }
+    };
   }
 
   public override void _PhysicsProcess(double delta)
   {
-    Vector2 direction = e.GlobalPosition.DirectionTo(e.Nav.GetNextPathPosition());
+    Vector2 goal = e.Nav.GetNextPathPosition();
+    GD.Print(goal);
+    Vector2 direction = e.GlobalPosition.DirectionTo(goal);
     e.Velocity = e.Velocity.Lerp(direction * SPEED, ACCEL * (float)delta);
+    if (goal.X != 0.0f)
+      e.Pivot.Scale = new Vector2(e.Velocity.X < 0.0f ? -1 : 1, 1);
     move(20, e);
   }
 
