@@ -1,12 +1,30 @@
 using Godot;
-using System;
 
 public partial class EnemyMovment : Node
 {
+  [Export]
+  public Enemy e;
+  [Export]
+  public float SPEED = 7.0f;
+  [Export]
+  public float ACCEL = 5.0f;
+
+  public override void _Ready()
+  {
+    e.Nav.SetDeferred("target_position", (GetTree().CurrentScene as MainScene).ChristmasTree.GlobalPosition);
+  }
+
+  public override void _PhysicsProcess(double delta)
+  {
+    Vector2 direction = e.GlobalPosition.DirectionTo(e.Nav.GetNextPathPosition());
+    e.Velocity = e.Velocity.Lerp(direction * SPEED, ACCEL * (float)delta);
+    move(20, e);
+  }
+
   public bool move(int stepCount, CharacterBody2D body)
   {
     Vector2 preVel = body.Velocity;
-    body.Velocity *= 1.0f / (float)stepCount;
+    body.Velocity *= 1.0f / stepCount;
     bool hit = false;
     while (stepCount-- > 0)
     {

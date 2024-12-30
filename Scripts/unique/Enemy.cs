@@ -4,6 +4,8 @@ public partial class Enemy : CharacterBody2D
 {
   [Export]
   public EnemyMovment movment;
+  [Export] // used by EnemyMovment
+  public NavigationAgent2D Nav;
   [Export]
   public float TargetDistance = 200.0f;
   [Export]
