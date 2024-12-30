@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://b6fehtatg86tg"]
+
+[ext_resource type="Script" path="res://Scripts/unique/jewel.cs" id="1_4jp72"]
+[ext_resource type="Texture2D" uid="uid://ch1miprr3lid1" path="res://Assets/jewels.png" id="2_0co2h"]
+[ext_resource type="Script" path="res://Scripts/Composites/Hurtbox.cs" id="2_j2yov"]
+[ext_resource type="Script" path="res://Scripts/Composites/HealthNode.cs" id="3_05ny2"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ne08b"]
+radius = 34.0588
+
+[node name="Jewel" type="StaticBody2D"]
+collision_layer = 0
+script = ExtResource("1_4jp72")
+
+[node name="Icon" type="Sprite2D" parent="."]
+position = Vector2(14, 14)
+texture = ExtResource("2_0co2h")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ne08b")
+
+[node name="hurtbox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("2_j2yov")
+health = NodePath("../HealthNode")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hurtbox"]
+shape = SubResource("CircleShape2D_ne08b")
+
+[node name="HealthNode" type="Node" parent="."]
+script = ExtResource("3_05ny2")
+MaxHealth = 1.0

@@ -383,6 +383,7 @@ disabled = true
 position = Vector2(-266, 108)
 
 [node name="Sprite2D" type="Sprite2D" parent="ChristmasTree"]
+z_index = 5
 scale = Vector2(5, 5)
 texture = ExtResource("7_0fovu")
 region_enabled = true
@@ -431,6 +432,7 @@ position = Vector2(37, 34)
 position = Vector2(46, 58)
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+visible = false
 position = Vector2(-5, 0)
 navigation_polygon = SubResource("NavigationPolygon_tmnjj")
 
