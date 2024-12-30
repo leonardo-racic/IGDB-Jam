@@ -1,15 +1,21 @@
 using Godot;
 using System;
 
-public partial class jewel : StaticBody2D
+public partial class jewel : CharacterBody2D
 {
-	// Called when the node enters the scene tree for the first time.
-	public override void _Ready()
-	{
-	}
+  // Called when the node enters the scene tree for the first time.
+  public override void _Ready()
+  {
+  }
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
-	{
-	}
+  // Called every frame. 'delta' is the elapsed time since the previous frame.
+  public override void _Process(double delta)
+  {
+  }
+
+  public void areaEntered(Area2D area)
+  {
+    QueueFree();
+ 
+  }
 }

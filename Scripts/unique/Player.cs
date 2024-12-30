@@ -15,6 +15,8 @@ public partial class Player : CharacterBody2D
 
   public bool Attacking = false;
 
+  public int doubloonCount = 0;
+
   private bool tackleDebounce = false;
 
   private double TACKLE_DURATION = 0.25;
