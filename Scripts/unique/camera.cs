@@ -11,6 +11,8 @@ public partial class camera : Camera2D
   public float followDistance { get; set; } = 250.0f;
   [Export]
   public float transitionSpeed { get; set; } = 0.02f;
+  [Export]
+  public Vector2 restingPos { get; set; } = Vector2.Zero;
 
   public bool transitioningToPlayer;
 
@@ -35,7 +37,7 @@ public partial class camera : Camera2D
     if (transitioningToPlayer)
       endPos += (plr.GlobalPosition - endPos) * transitionSpeed;
     else
-      endPos += (Vector2.Zero - endPos) * transitionSpeed;
+      endPos += (restingPos - endPos) * transitionSpeed;
 
     if (Input.IsActionJustPressed("space") || transitioningToPlayer)
       applyScreenShake(2, plr.Position.Angle(), 1);
