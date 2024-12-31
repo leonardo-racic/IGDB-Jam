@@ -1,5 +1,4 @@
 using Godot;
-using Godot.Collections;
 using System;
 
 public partial class EnemyMovment : Node
@@ -10,6 +9,10 @@ public partial class EnemyMovment : Node
   public float SPEED = 7.0f;
   [Export]
   public float ACCEL = 5.0f;
+  [Export]
+  public float MAX_HELD_GIFTS_AMOUNT = 4.0f;
+  [Export]
+  public float MIN_HELD_GIFTS_AMOUNT = 0.3f;
 
   public override void _Ready()
   {
@@ -33,6 +36,11 @@ public partial class EnemyMovment : Node
       }
       else
       {
+        float heldGiftsAmount;
+        do
+          heldGiftsAmount = (float)new Random().NextDouble() * MAX_HELD_GIFTS_AMOUNT;
+        while (heldGiftsAmount < MIN_HELD_GIFTS_AMOUNT);
+        e.HeldGiftsAmount = heldGiftsAmount;
         scene.OnRobberEvaded(e);
       }
     };
