@@ -44,7 +44,7 @@ public partial class Enemy : CharacterBody2D
 
   public override void _Process(double delta)
   {
-    if (fleeing && pl != null)
+    /*if (fleeing && pl != null)
     {
       //points away
       Vector2 away = GlobalPosition - pl.GlobalPosition; //(away)
@@ -54,7 +54,7 @@ public partial class Enemy : CharacterBody2D
       Pivot.Scale = new Vector2(Velocity.X > 0.0f ? 1 : -1, 1);
     }
     else
-      Velocity = Vector2.Zero;
+      Velocity = Vector2.Zero;*/
   }
 
   public override void _PhysicsProcess(double delta)
