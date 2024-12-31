@@ -32,22 +32,22 @@ public partial class MainScene : Node2D
 			}
 		}
 	}
+	public NavigationObstacle2D PlrObstacle; // Also used by EnemyMovment.cs
 	
-	private NavigationObstacle2D plrObstacle;
 	private float giftsAmount;
 
     public override void _Ready()
     {
 		GiftsAmount = StartingGiftsAmount;
 		GiftBar.UpdateBar(GiftsAmount);
-		plrObstacle = NavRegion.GetNode<NavigationObstacle2D>("Player");
+		PlrObstacle = NavRegion.GetNode<NavigationObstacle2D>("Player");
     }
 
     public override void _PhysicsProcess(double delta)
     {
-		if (plrObstacle == null || NavRegion.IsBaking()) 
+		if (PlrObstacle == null || NavRegion.IsBaking()) 
 			return;
-		plrObstacle.GlobalPosition = plr.GlobalPosition;
+		PlrObstacle.GlobalPosition = plr.GlobalPosition;
 		handleObstacles();
 		NavRegion.BakeNavigationPolygon(false);
     }

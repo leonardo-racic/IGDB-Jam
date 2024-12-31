@@ -13,6 +13,8 @@ public partial class spawner : StaticBody2D
   public Node2D main;
   [Export]
   public int MaxEnemyCount = 5;
+  [Export] // Enemy's speed and accel + or - this variable (to make them more diverse ^^)
+  public float VelocityEpsilon = 0.5f;
 
   private float deltaElapsed = 0.0f;
 
@@ -41,8 +43,12 @@ public partial class spawner : StaticBody2D
       //we want to turn this into a random position
       Vector2 localPos = new Vector2(nextSingle(rand, rec.Size.X), nextSingle(rand, rec.Size.Y));
       Vector2 globalPos = localPos + target.GlobalPosition + rec.Position;
-      Node2D newEnemy = EnemyScene.Instantiate() as Node2D;
+
+      // Enemy conditioning
+      Enemy newEnemy = EnemyScene.Instantiate() as Enemy;
       newEnemy.GlobalPosition = globalPos;
+      newEnemy.movment.ACCEL += (rand.NextSingle() >= 0.5f ? -1 : 1) * VelocityEpsilon;
+      newEnemy.movment.SPEED += (rand.NextSingle() >= 0.5f ? -1 : 1) * VelocityEpsilon;
       main.AddChild(newEnemy);
       count--;
     }

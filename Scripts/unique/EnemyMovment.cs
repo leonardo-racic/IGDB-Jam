@@ -16,10 +16,13 @@ public partial class EnemyMovment : Node
 
   const float giftOffsetX = 3.0f;
   const float giftOffsetY = 1.5f;
+  const float fleePlayerCoef = 2.0f;
+
+  MainScene scene;
 
   public override void _Ready()
   {
-    MainScene scene = GetTree().CurrentScene as MainScene;
+    scene = GetTree().CurrentScene as MainScene;
     Node2D markers = scene.ChristmasTree.GetNode<Node2D>("Markers");
     int childIndex = new Random().Next(markers.GetChildCount());
     Marker2D target = markers.GetChild<Marker2D>(childIndex);
@@ -29,7 +32,7 @@ public partial class EnemyMovment : Node
     e.Nav.NavigationFinished += () =>
     {
       if (e.Nav.TargetPosition == target.GlobalPosition)
-        handleGiftGrabbing(scene);
+        handleGiftGrabbing();
       else
         scene.OnRobberEvaded(e);
     };
@@ -42,14 +45,21 @@ public partial class EnemyMovment : Node
     e.Velocity = e.Velocity.Lerp(direction * SPEED, ACCEL * (float)delta);
     if (goal.X != 0.0f)
       e.Pivot.Scale = new Vector2(e.Velocity.X < 0.0f ? -1 : 1, 1);
+    if (e.GlobalPosition.DistanceTo(scene.plr.GlobalPosition) + fleePlayerCoef <= scene.PlrObstacle.Radius)
+    {
+      e.Velocity *= fleePlayerCoef;
+      e.Sprite.SpeedScale = fleePlayerCoef;
+    }
+    else
+      e.Sprite.SpeedScale = 1.0f;
     move(20, e);
   }
 
-  private async void handleGiftGrabbing(MainScene scene)
+  private async void handleGiftGrabbing()
   {
     float heldGiftsAmount;
     do
-      heldGiftsAmount = (float)new Random().NextDouble() * MAX_HELD_GIFTS_AMOUNT;
+      heldGiftsAmount = new Random().NextSingle() * MAX_HELD_GIFTS_AMOUNT;
     while (heldGiftsAmount < MIN_HELD_GIFTS_AMOUNT);
     e.HeldGiftsAmount = heldGiftsAmount;
 
