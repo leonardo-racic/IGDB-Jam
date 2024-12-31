@@ -19,8 +19,10 @@ public partial class Player : CharacterBody2D
 
   private bool tackleDebounce = false;
 
-  private double TACKLE_DURATION = 0.25;
-  private double TACKLE_COOLDOWN = 0.3;
+  public double TACKLE_DURATION = 0.25;
+  public double TACKLE_COOLDOWN = 0.3;
+
+  public float money = 0.0f;
 
   public override void _Ready()
   {
@@ -55,5 +57,11 @@ public partial class Player : CharacterBody2D
     {
       Sprite.Play(state);
     }
+  }
+
+  public void onJewelCollect(Area2D area)
+  {
+    money += (area as Hitbox).Damage;
+    GD.Print(money);
   }
 }

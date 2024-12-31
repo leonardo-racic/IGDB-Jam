@@ -79,6 +79,7 @@ healthNode = NodePath("Health")
 Hand = NodePath("Pivot/Hand")
 Sprite = NodePath("Pivot/Character")
 jewelDropCount = 1
+minMaxJewelSpeed = Vector2(100, 150)
 jewelScene = ExtResource("2_k2egx")
 
 [node name="Pivot" type="Node2D" parent="."]
