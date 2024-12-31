@@ -441,13 +441,11 @@ position = Vector2(46, 58)
 position = Vector2(266, -108)
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
-visible = false
 position = Vector2(-5, 0)
 navigation_polygon = SubResource("NavigationPolygon_tmnjj")
 
 [node name="ChristmasTree" type="NavigationObstacle2D" parent="NavigationRegion2D"]
 position = Vector2(-266, 108)
-radius = 1.0
 vertices = PackedVector2Array(-24, 94, -6, 107, 31, 107, 43, 100, 42, 79, 42, 57, 29, 45, -7, 45, -24, 57)
 affect_navigation_mesh = true
 avoidance_enabled = false
