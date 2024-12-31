@@ -27,16 +27,6 @@ public partial class MainScene : Node2D
 	// Used in order to  avoid the "Navigation map synchronisation error" coming up due to two obstacles overlapping...
 	public void handleObstacles() {
 		// WIP
-		foreach (Node node in NavRegion.GetChildren())
-		{
-			NavigationObstacle2D obstacle = node as NavigationObstacle2D;
-			if (obstacle == plrObstacle)
-			    continue;
-			else if (plrObstacle.GlobalPosition.DistanceTo(obstacle.GlobalPosition) > plrObstacle.Radius)
-				obstacle.AffectNavigationMesh = true;
-			else
-				obstacle.AffectNavigationMesh = false;
-		}
 	}
 
     public void OnRobberEvaded(Enemy robber)
