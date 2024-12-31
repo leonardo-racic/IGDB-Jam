@@ -1,4 +1,5 @@
 using Godot;
+using System;
 
 public partial class Enemy : CharacterBody2D
 {
@@ -18,25 +19,36 @@ public partial class Enemy : CharacterBody2D
   public AnimatedSprite2D Hand;
   [Export]
   public AnimatedSprite2D Sprite;
+  [Export]
+  public int jewelDropCount;
+  [Export]
+  public Vector2 minMaxJewelSpeed;
+  [Export]
+  public PackedScene jewelScene;
+
+  MainScene main;
 
   private bool fleeing = false;
   private Node2D pl = null;
   private int PlayerCollisionID = 2;
 
-    public override void _Ready()
-    {
-      healthNode.Dead += () => QueueFree();
-      Sprite.Play("default");
-      Hand.Play("hand");
-    }
-
-    public override void _Process(double delta)
+  public override void _Ready()
   {
-    if (fleeing)
+    if (minMaxJewelSpeed.X > minMaxJewelSpeed.Y)
+      GD.PrintErr("ERROR: minimum jewel speed is higher than maximum on enemy");
+    healthNode.Dead += () => onDead();
+    Sprite.Play("default");
+    Hand.Play("hand");
+    main = GetTree().CurrentScene as MainScene;
+  }
+
+  public override void _Process(double delta)
+  {
+    if (fleeing && pl != null)
     {
       //points away
       Vector2 away = GlobalPosition - pl.GlobalPosition; //(away)
-      //(not towards - away)
+      //(not towards; away)
       float mag = TargetDistance - away.Length();
       Velocity = away.Normalized() * mag * (float)delta;
       Pivot.Scale = new Vector2(Velocity.X > 0.0f ? 1 : -1, 1);
@@ -67,6 +79,24 @@ public partial class Enemy : CharacterBody2D
 
   void objectLeftView(Area2D area)
   {
-    fleeing = !area.GetCollisionLayerValue(PlayerCollisionID);
+    fleeing = area.GetCollisionLayerValue(PlayerCollisionID) ? false : fleeing;
+  }
+
+  public void onDead()
+  {
+    //WE SPAWN THEM DOUBLOONS
+    while (jewelDropCount > 0)
+    {
+      jewel instance = jewelScene.Instantiate() as jewel;
+      main.CallDeferred("add_child", instance);
+      RandomNumberGenerator rand = new RandomNumberGenerator();
+      float angle = rand.Randf() * MathF.PI;
+      instance.GlobalPosition = GlobalPosition;
+      instance.Velocity = Vector2.FromAngle(angle);
+      float mag = (rand.Randf() * (minMaxJewelSpeed.Y - minMaxJewelSpeed.X)) + minMaxJewelSpeed.X;
+      instance.Velocity *= mag;
+      jewelDropCount--;
+    }
+    QueueFree();
   }
 }

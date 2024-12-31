@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://b6fehtatg86tg"]
+
+[ext_resource type="Script" path="res://Scripts/unique/jewel.cs" id="1_4jp72"]
+[ext_resource type="Texture2D" uid="uid://ch1miprr3lid1" path="res://Assets/jewels.png" id="2_0co2h"]
+[ext_resource type="Script" path="res://Scripts/Composites/Hitbox.cs" id="3_fmcqo"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ne08b"]
+radius = 34.0588
+
+[node name="Jewel" type="CharacterBody2D" node_paths=PackedStringArray("detectBox")]
+collision_layer = 0
+collision_mask = 3
+script = ExtResource("1_4jp72")
+acceleration = 2.0
+detectBox = NodePath("detection")
+
+[node name="Icon" type="Sprite2D" parent="."]
+position = Vector2(14, 14)
+texture = ExtResource("2_0co2h")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ne08b")
+
+[node name="detection" type="Area2D" parent="."]
+editor_description = "The script isn't actually a hitbox; it carries the value of the given jewel"
+collision_layer = 16
+collision_mask = 8
+script = ExtResource("3_fmcqo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="detection"]
+shape = SubResource("CircleShape2D_ne08b")
+
+[connection signal="area_entered" from="detection" to="." method="areaEntered"]

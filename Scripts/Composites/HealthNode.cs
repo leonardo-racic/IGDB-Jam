@@ -8,8 +8,8 @@ public partial class HealthNode : Node
   [Export]
   public float MaxHealth
   {
-    get => maxHealth;
-    set => maxHealth = Mathf.Max(1.0f, value);
+	get => maxHealth;
+	set => maxHealth = Mathf.Max(1.0f, value);
   }
 
   [Export]
@@ -18,14 +18,14 @@ public partial class HealthNode : Node
 
   public float Health
   {
-    get => health;
-    set
-    {
-      health = Mathf.Clamp(value, 0.0f, maxHealth);
+	get => health;
+	set
+	{
+	  health = Mathf.Clamp(value, 0.0f, maxHealth);
 
-      if (health <= 0.0f)
-        EmitSignal(nameof(Dead));
-    }
+	  if (health <= 0.0f)
+		EmitSignal(nameof(Dead));
+	}
   }
 
   private float maxHealth;
