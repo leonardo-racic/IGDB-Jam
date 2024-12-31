@@ -28,7 +28,6 @@ public partial class Enemy : CharacterBody2D
 
   MainScene main;
 
-  private Node2D pl = null;
   private int PlayerCollisionID = 2;
 
   public override void _Ready()
