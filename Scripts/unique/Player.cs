@@ -62,6 +62,5 @@ public partial class Player : CharacterBody2D
   public void onJewelCollect(Area2D area)
   {
     money += (area as Hitbox).Damage;
-    GD.Print(money);
   }
 }
