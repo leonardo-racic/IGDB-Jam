@@ -13,15 +13,20 @@ public partial class destructableObstacle : Sprite2D
   [Export]
   private HealthNode healthNode;
 
+  [Export]
+  public CircleShape2D collisionShape;
+  [Export]
+  public CollisionShape2D[] collShape;
+
   // Called when the node enters the scene tree for the first time.
   public override void _Ready()
   {
     healthNode.MaxHealth = health;
     healthNode.Health = health;
-    RemoveChild(navOb);
+    foreach (CollisionShape2D i in collShape)
+      i.Shape = collisionShape;
+    navOb.Radius = collisionShape.Radius;
     navMesh.AddChild(navOb);
-    GD.Print(navOb.GetPath());
-    navOb.QueueFree();
     healthNode.Dead += () => onDead();
   }
 
@@ -33,7 +38,6 @@ public partial class destructableObstacle : Sprite2D
 
   void onDead()
   {
-    navOb.QueueFree();
     QueueFree();
   }
 }

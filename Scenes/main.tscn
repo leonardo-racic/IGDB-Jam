@@ -522,7 +522,8 @@ text = "Round: XXX"
 label_settings = SubResource("LabelSettings_3167n")
 
 [node name="Obstacle" parent="." node_paths=PackedStringArray("navMesh") instance=ExtResource("9_n47qg")]
-position = Vector2(488, 117)
+position = Vector2(440, 266)
 navMesh = NodePath("../NavigationRegion2D")
+health = 1e+12
 
 [connection signal="sendScreenShake" from="Player" to="Camera2D" method="applyScreenShake"]
