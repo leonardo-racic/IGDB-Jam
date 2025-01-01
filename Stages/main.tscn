@@ -1,13 +1,13 @@
 [gd_scene load_steps=20 format=4 uid="uid://o51s4fmin34l"]
 
-[ext_resource type="PackedScene" uid="uid://doqjj6i3kg3ow" path="res://Scenes/player.tscn" id="1_4a1jc"]
-[ext_resource type="Script" path="res://Scripts/unique/MainScene.cs" id="1_4gme0"]
-[ext_resource type="Script" path="res://Scripts/unique/camera.cs" id="1_mfgub"]
-[ext_resource type="PackedScene" uid="uid://b8ksd0iqhrowa" path="res://Scenes/enemy.tscn" id="3_mcght"]
-[ext_resource type="Script" path="res://Scripts/unique/Spawner.cs" id="4_mv2ye"]
-[ext_resource type="Texture2D" uid="uid://5khvxw35be0g" path="res://Assets/wall.png" id="4_oti2j"]
-[ext_resource type="Texture2D" uid="uid://iov4pc5q2xgi" path="res://Assets/blocks-Sheet.png" id="7_0fovu"]
-[ext_resource type="PackedScene" uid="uid://b50jidx5a5pqa" path="res://UI/gift_bar.tscn" id="8_u5jwg"]
+[ext_resource type="Script" path="res://Scripts/unique/MainScene.cs" id="1_micu7"]
+[ext_resource type="Texture2D" uid="uid://5khvxw35be0g" path="res://Assets/wall.png" id="2_22gf2"]
+[ext_resource type="Texture2D" uid="uid://iov4pc5q2xgi" path="res://Assets/blocks-Sheet.png" id="3_8utyt"]
+[ext_resource type="PackedScene" uid="uid://doqjj6i3kg3ow" path="res://Scenes/player.tscn" id="4_xau3b"]
+[ext_resource type="Script" path="res://Scripts/unique/camera.cs" id="5_wdsax"]
+[ext_resource type="Script" path="res://Scripts/unique/Spawner.cs" id="6_rlhx0"]
+[ext_resource type="PackedScene" uid="uid://b8ksd0iqhrowa" path="res://Scenes/enemy.tscn" id="7_t8hls"]
+[ext_resource type="PackedScene" uid="uid://b50jidx5a5pqa" path="res://UI/gift_bar.tscn" id="8_u6efg"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_ayqgr"]
 vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
@@ -16,7 +16,7 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(-8, -8, 8, -8, 8, 8, -8
 agent_radius = 0.0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6d0xx"]
-texture = ExtResource("4_oti2j")
+texture = ExtResource("2_22gf2")
 0:0/0 = 0
 0:0/0/terrain_set = 0
 0:0/0/terrain = 0
@@ -254,7 +254,7 @@ outline_color = Color(0, 0, 0, 1)
 [node name="Main" type="Node2D" node_paths=PackedStringArray("ChristmasTree", "NavRegion", "plr", "GiftBar", "spawner", "RoundLabel")]
 texture_filter = 1
 position = Vector2(1, 0)
-script = ExtResource("1_4gme0")
+script = ExtResource("1_micu7")
 ChristmasTree = NodePath("ChristmasTree")
 NavRegion = NodePath("NavigationRegion2D")
 plr = NodePath("Player")
@@ -278,7 +278,7 @@ position = Vector2(0.5, -188)
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Doors/UpperDoor"]
-texture = ExtResource("7_0fovu")
+texture = ExtResource("3_8utyt")
 region_enabled = true
 region_rect = Rect2(48, 32, 16, 32)
 
@@ -291,7 +291,7 @@ metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Doors/UpperDoor2"]
 position = Vector2(-249, 0)
-texture = ExtResource("7_0fovu")
+texture = ExtResource("3_8utyt")
 region_enabled = true
 region_rect = Rect2(48, 32, 16, 32)
 
@@ -332,7 +332,7 @@ position = Vector2(-16.5, 4)
 position = Vector2(0, 192.5)
 
 [node name="Sprite2D" type="Sprite2D" parent="Doors/DownDoor"]
-texture = ExtResource("7_0fovu")
+texture = ExtResource("3_8utyt")
 region_enabled = true
 region_rect = Rect2(80, 32, 16, 32)
 
@@ -344,13 +344,13 @@ shape = SubResource("CapsuleShape2D_fdhin")
 [node name="Marker2D" type="Marker2D" parent="Doors/DownDoor"]
 position = Vector2(9.5, 4.5)
 
-[node name="Player" parent="." instance=ExtResource("1_4a1jc")]
+[node name="Player" parent="." instance=ExtResource("4_xau3b")]
 position = Vector2(162, 124)
 
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("plr")]
 position_smoothing_speed = 15.0
 editor_draw_drag_margin = true
-script = ExtResource("1_mfgub")
+script = ExtResource("5_wdsax")
 plr = NodePath("../Player")
 restingRadius = 300.0
 restingPos = Vector2(-266, 108)
@@ -361,9 +361,9 @@ outsideAreaShakeJit = 0.5
 visible = false
 collision_layer = 0
 collision_mask = 0
-script = ExtResource("4_mv2ye")
+script = ExtResource("6_rlhx0")
 spawnCount = 1
-EnemyScene = ExtResource("3_mcght")
+EnemyScene = ExtResource("7_t8hls")
 enemiesOrigin = NodePath("../Enemies")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Spawner"]
@@ -377,7 +377,7 @@ position = Vector2(-266, 108)
 [node name="Sprite2D" type="Sprite2D" parent="ChristmasTree"]
 z_index = 5
 scale = Vector2(5, 5)
-texture = ExtResource("7_0fovu")
+texture = ExtResource("3_8utyt")
 region_enabled = true
 region_rect = Rect2(17, 73, 30, 39)
 
@@ -427,7 +427,6 @@ position = Vector2(46, 58)
 position = Vector2(266, -108)
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
-visible = false
 position = Vector2(-5, 0)
 navigation_polygon = SubResource("NavigationPolygon_tmnjj")
 
@@ -463,7 +462,7 @@ affect_navigation_mesh = true
 
 [node name="Piano&Stool" type="NavigationObstacle2D" parent="NavigationRegion2D"]
 position = Vector2(-225, 16)
-vertices = PackedVector2Array(-238, -149, -290, -59, -274, 1, -232, 1, -213, 40, -162, 36, -144, -1, -112, 0, -70, -62, -111, -153)
+vertices = PackedVector2Array(-254, -94, -303, -55, -274, 1, -232, 1, -213, 40, -162, 36, -144, -1, -112, 0, -70, -62, -117, -93)
 affect_navigation_mesh = true
 
 [node name="Enemies" type="Node2D" parent="."]
@@ -476,19 +475,19 @@ scale = Vector2(5, 5)
 metadata/_edit_group_ = true
 
 [node name="Piano" type="Sprite2D" parent="Obstacles/Piano"]
-texture = ExtResource("7_0fovu")
+texture = ExtResource("3_8utyt")
 region_enabled = true
 region_rect = Rect2(80, 64, 48, 32)
 
 [node name="Stool" type="Sprite2D" parent="Obstacles/Piano"]
 position = Vector2(2.8, 17)
 scale = Vector2(0.8375, 0.4625)
-texture = ExtResource("7_0fovu")
+texture = ExtResource("3_8utyt")
 region_enabled = true
 region_rect = Rect2(96, 96, 16, 16)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Obstacles/Piano"]
-polygon = PackedVector2Array(-14, 1, -13.6, 6.6, -10.8, 8.4, -11.4, 11.8, -4.2, 14.4, -0.799999, 21.6, 8.2, 21.6, 12.2, 15, 18.8, 11.8, 18.6, 7.6, 22, 6.6, 21.8, 0.599999, 17.8, -13.2, -6.2, -13.8)
+polygon = PackedVector2Array(-14, 1, -13.6, 6.6, -10.8, 8.4, -11.4, 11.8, -4.2, 14.4, -0.799999, 21.6, 8.2, 21.6, 12.2, 15, 18.8, 11.8, 18.6, 7.6, 22, 6.6, 21.8, 0.599999, 18, -2.4, -9.39999, -2.4)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -501,7 +500,7 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="GiftBar" parent="CanvasLayer/GiftBarMarginContainer" instance=ExtResource("8_u5jwg")]
+[node name="GiftBar" parent="CanvasLayer/GiftBarMarginContainer" instance=ExtResource("8_u6efg")]
 layout_mode = 2
 texture = SubResource("ViewportTexture_jpoxo")
 
