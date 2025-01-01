@@ -461,7 +461,7 @@ affect_navigation_mesh = true
 avoidance_enabled = false
 
 [node name="Player" type="NavigationObstacle2D" parent="NavigationRegion2D"]
-radius = 114.36
+radius = 115.0
 affect_navigation_mesh = true
 avoidance_enabled = false
 

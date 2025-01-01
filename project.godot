@@ -11,8 +11,10 @@ config_version=5
 [application]
 
 config/name="Meowelry"
+config/description="Indie Game Developer Game Jam 2024-2025"
 run/main_scene="res://UI/main_menu.tscn"
 config/features=PackedStringArray("4.3", "C#", "GL Compatibility")
+config/icon="res://Assets/icon.png"
 
 [display]
 

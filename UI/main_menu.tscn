@@ -1,10 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://c4ca5bwu03rym"]
+[gd_scene load_steps=5 format=3 uid="uid://c4ca5bwu03rym"]
 
 [ext_resource type="Script" path="res://Scripts/unique/MainMenu.cs" id="1_gc8r3"]
+[ext_resource type="Texture2D" uid="uid://co0pnx2hcvse6" path="res://Assets/icon.png" id="2_aw6bf"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_an8ax"]
 font_size = 171
 outline_size = 42
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_uy37t"]
+font_size = 20
+outline_size = 15
 outline_color = Color(0, 0, 0, 1)
 
 [node name="MainMenu" type="CanvasLayer" node_paths=PackedStringArray("buttons")]
@@ -20,7 +26,7 @@ grow_horizontal = 2
 [node name="TitleMarginContainer" type="MarginContainer" parent="VBoxContainer"]
 layout_mode = 2
 theme_override_constants/margin_top = 64
-theme_override_constants/margin_bottom = 64
+theme_override_constants/margin_bottom = 32
 
 [node name="TitleLabel" type="Label" parent="VBoxContainer/TitleMarginContainer"]
 layout_mode = 2
@@ -28,6 +34,13 @@ text = "MEOWELERY!"
 label_settings = SubResource("LabelSettings_an8ax")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="IconTextureRect" type="TextureRect" parent="VBoxContainer"]
+custom_minimum_size = Vector2(300, 300)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("2_aw6bf")
+stretch_mode = 5
 
 [node name="LevelsColumnsVBoxContainer" type="VBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
@@ -48,3 +61,10 @@ custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 64
 text = "Rotated"
+
+[node name="ContributionsLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Made by (Dev)Ado, maningreen,
+nedyarb08, Matt Slaven"
+label_settings = SubResource("LabelSettings_uy37t")
+horizontal_alignment = 1

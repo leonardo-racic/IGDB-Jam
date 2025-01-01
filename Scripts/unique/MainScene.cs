@@ -39,7 +39,7 @@ public partial class MainScene : Node2D
 				UI.RoundLabel.Hide();
 				UI.CurrentGiftBar.Hide();
 				GetTree().Paused = true;
-				UI.ResultsLabel.Text = $"Round: {round}\nMoney: {plr.money}$";
+				UI.ResultsLabel.Text = $"Round: {round}\nMeowelery: {plr.money}$";
 				UI.ResultsContainer.Show();
 			}
 			else
@@ -66,6 +66,8 @@ public partial class MainScene : Node2D
 
 		spawner.SpawnCountSaturated += () =>
 		{
+			if (PlrObstacle.Radius > 140.0f)
+				PlrObstacle.Radius += 1.0f;
 			spawning = false;
 			spawner.spawnedEnemyCount = 0;
 			spawner.VelocityEpsilon += 0.1f;
