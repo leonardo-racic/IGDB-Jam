@@ -7,9 +7,11 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_53c4k"]
 radius = 47.0106
 
-[node name="Obstacle" type="Sprite2D" node_paths=PackedStringArray("collisionShapes")]
+[node name="Obstacle" type="Sprite2D" node_paths=PackedStringArray("navOb", "healthNode")]
 script = ExtResource("1_j5a3i")
-collisionShapes = []
+navOb = NodePath("NavigationObstacle2D")
+health = 10.0
+healthNode = NodePath("Health")
 
 [node name="CollisionBody" type="StaticBody2D" parent="."]
 collision_mask = 0

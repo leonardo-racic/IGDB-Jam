@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=4 uid="uid://o51s4fmin34l"]
+[gd_scene load_steps=21 format=4 uid="uid://o51s4fmin34l"]
 
 [ext_resource type="PackedScene" uid="uid://doqjj6i3kg3ow" path="res://Scenes/player.tscn" id="1_4a1jc"]
 [ext_resource type="Script" path="res://Scripts/unique/MainScene.cs" id="1_4gme0"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://5khvxw35be0g" path="res://Assets/wall.png" id="4_oti2j"]
 [ext_resource type="Texture2D" uid="uid://iov4pc5q2xgi" path="res://Assets/blocks-Sheet.png" id="7_0fovu"]
 [ext_resource type="PackedScene" uid="uid://b50jidx5a5pqa" path="res://UI/gift_bar.tscn" id="8_u5jwg"]
+[ext_resource type="PackedScene" uid="uid://dcb2wplfxrv6c" path="res://Scenes/obstacle.tscn" id="9_n47qg"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_ayqgr"]
 vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
@@ -358,7 +359,6 @@ outsideAreaShakeMag = 1.0
 outsideAreaShakeJit = 0.5
 
 [node name="Spawner" type="StaticBody2D" parent="." node_paths=PackedStringArray("enemiesOrigin")]
-visible = false
 collision_layer = 0
 collision_mask = 0
 script = ExtResource("4_mv2ye")
@@ -427,7 +427,6 @@ position = Vector2(46, 58)
 position = Vector2(266, -108)
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
-visible = false
 position = Vector2(-5, 0)
 navigation_polygon = SubResource("NavigationPolygon_tmnjj")
 
@@ -521,5 +520,9 @@ theme_override_constants/margin_bottom = 10
 layout_mode = 2
 text = "Round: XXX"
 label_settings = SubResource("LabelSettings_3167n")
+
+[node name="Obstacle" parent="." node_paths=PackedStringArray("navMesh") instance=ExtResource("9_n47qg")]
+position = Vector2(488, 117)
+navMesh = NodePath("../NavigationRegion2D")
 
 [connection signal="sendScreenShake" from="Player" to="Camera2D" method="applyScreenShake"]
