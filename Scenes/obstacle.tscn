@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dcb2wplfxrv6c"]
+[gd_scene load_steps=7 format=3 uid="uid://jitgefdhmjx"]
 
 [ext_resource type="Script" path="res://Scripts/unique/destructableObstacle.cs" id="1_j5a3i"]
 [ext_resource type="Texture2D" uid="uid://iov4pc5q2xgi" path="res://Assets/blocks-Sheet.png" id="1_otgvf"]
@@ -13,13 +13,13 @@ radius = 100.0
 [node name="Obstacle" type="Sprite2D" node_paths=PackedStringArray("navOb", "healthNode", "collShape")]
 texture = ExtResource("1_otgvf")
 script = ExtResource("1_j5a3i")
-navOb = NodePath("NavigationObstacle2D")
+navOb = NodePath("NavOb")
 health = 10.0
 healthNode = NodePath("Health")
 collisionShape = SubResource("CircleShape2D_o3cc7")
 collShape = [NodePath("Collision/CollisionShape2D"), NodePath("Hurtbox/CollisionShape2D")]
 
-[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="."]
+[node name="NavOb" type="NavigationObstacle2D" parent="."]
 affect_navigation_mesh = true
 
 [node name="Collision" type="StaticBody2D" parent="."]

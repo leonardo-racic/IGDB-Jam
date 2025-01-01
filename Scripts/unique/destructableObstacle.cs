@@ -5,8 +5,6 @@ public partial class destructableObstacle : Sprite2D
 {
   [Export]
   private NavigationObstacle2D navOb;
-  [Export]
-  public NavigationRegion2D navMesh;
 
   [Export]
   public float health;
@@ -14,7 +12,7 @@ public partial class destructableObstacle : Sprite2D
   private HealthNode healthNode;
 
   [Export]
-  public CircleShape2D collisionShape;
+  public Shape2D collisionShape;
   [Export]
   public CollisionShape2D[] collShape;
 
@@ -25,8 +23,6 @@ public partial class destructableObstacle : Sprite2D
     healthNode.Health = health;
     foreach (CollisionShape2D i in collShape)
       i.Shape = collisionShape;
-    navOb.Radius = collisionShape.Radius;
-    navMesh.AddChild(navOb);
     healthNode.Dead += () => onDead();
   }
 
@@ -38,6 +34,7 @@ public partial class destructableObstacle : Sprite2D
 
   void onDead()
   {
+    navOb.QueueFree();
     QueueFree();
   }
 }
