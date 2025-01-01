@@ -9,13 +9,12 @@ public partial class MainScene : Node2D
 	[Export]
 	public Player plr;
 	[Export]
-	public GiftBar GiftBar;
+	public GameUI UI;
 	[Export]
 	public float StartingGiftsAmount = 12.0f;
 	[Export]
 	public Spawner spawner;
-	[Export]
-	public Label RoundLabel;
+
 
 	public int Round
 	{
@@ -23,7 +22,7 @@ public partial class MainScene : Node2D
 		set
 		{
 			round = Mathf.Max(value, 1);
-			RoundLabel.Text = $"Round: {round}";
+			UI.RoundLabel.Text = $"Round: {round}";
 		}
 	}
 
@@ -35,13 +34,18 @@ public partial class MainScene : Node2D
 			giftsAmount = Mathf.Max(value, 0.0f);
 			if (giftsAmount == 0.0f)
 			{
-				GD.Print("GAME FINISHED, NO MORE GIFTS!!!");
-				GiftBar.Hide();
+				// GAME OVER
+				Hide();
+				UI.RoundLabel.Hide();
+				UI.CurrentGiftBar.Hide();
+				GetTree().Paused = true;
+				UI.ResultsLabel.Text = $"Round: {round}\nMoney: {plr.money}$";
+				UI.ResultsContainer.Show();
 			}
 			else
 			{
-				GiftBar.UpdateBar(giftsAmount);
-                GiftBar.Show();
+				UI.CurrentGiftBar.UpdateBar(giftsAmount);
+                UI.CurrentGiftBar.Show();
 			}
 		}
 	}
@@ -53,8 +57,10 @@ public partial class MainScene : Node2D
 
     public override void _Ready()
     {
-		GiftBar.UpdateBar(GiftsAmount);
-		RoundLabel.Text = $"Round: {round}";
+		Show();
+		UI.CurrentGiftBar.UpdateBar(GiftsAmount);
+		
+		UI.RoundLabel.Text = $"Round: {round}";
 		GiftsAmount = StartingGiftsAmount;
 		PlrObstacle = NavRegion.GetNode<NavigationObstacle2D>("Player");
 
@@ -62,10 +68,8 @@ public partial class MainScene : Node2D
 		{
 			spawning = false;
 			spawner.spawnedEnemyCount = 0;
-			spawner.VelocityEpsilon += 0.005f;
+			spawner.VelocityEpsilon += 0.1f;
 			if (Round % 2 == 0)
-				spawner.VelocityEpsilon += 0.005f;
-			if (Round % 5 == 0)
 				spawner.MaxEnemyCount = (int)Mathf.Ceil(spawner.MaxEnemyCount * 2);
 		};
     }
