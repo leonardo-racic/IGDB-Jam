@@ -66,7 +66,7 @@ radius = 12.595
 height = 43.19
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7bok3"]
-radius = 111.041
+radius = 58.1378
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("Sprite", "TackleHitbox")]
 collision_layer = 2

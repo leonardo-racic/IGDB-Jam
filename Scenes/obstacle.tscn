@@ -1,0 +1,41 @@
+[gd_scene load_steps=7 format=3 uid="uid://dcb2wplfxrv6c"]
+
+[ext_resource type="Script" path="res://Scripts/unique/destructableObstacle.cs" id="1_j5a3i"]
+[ext_resource type="Texture2D" uid="uid://iov4pc5q2xgi" path="res://Assets/blocks-Sheet.png" id="1_otgvf"]
+[ext_resource type="Script" path="res://Scripts/Composites/Hurtbox.cs" id="2_883wt"]
+[ext_resource type="Script" path="res://Scripts/Composites/HealthNode.cs" id="3_3y6w0"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_o3cc7"]
+radius = 100.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_v484h"]
+
+[node name="Obstacle" type="Sprite2D" node_paths=PackedStringArray("navOb", "healthNode", "collShape")]
+texture = ExtResource("1_otgvf")
+script = ExtResource("1_j5a3i")
+navOb = NodePath("NavigationObstacle2D")
+health = 10.0
+healthNode = NodePath("Health")
+collisionShape = SubResource("CircleShape2D_o3cc7")
+collShape = [NodePath("Collision/CollisionShape2D"), NodePath("Hurtbox/CollisionShape2D")]
+
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="."]
+affect_navigation_mesh = true
+
+[node name="Collision" type="StaticBody2D" parent="."]
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Collision"]
+shape = SubResource("CircleShape2D_v484h")
+
+[node name="Hurtbox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("2_883wt")
+health = NodePath("../Health")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("CircleShape2D_v484h")
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("3_3y6w0")
