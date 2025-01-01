@@ -34,10 +34,11 @@ public partial class Enemy : CharacterBody2D
   {
     if (minMaxJewelSpeed.X > minMaxJewelSpeed.Y)
       GD.PrintErr("ERROR: minimum jewel speed is higher than maximum on enemy");
-    healthNode.Dead += () => onDead();
     Sprite.Play("default");
     Hand.Play("hand");
     main = GetTree().CurrentScene as MainScene;
+
+    healthNode.Dead += () => onDead();
   }
 
   public override void _PhysicsProcess(double delta)

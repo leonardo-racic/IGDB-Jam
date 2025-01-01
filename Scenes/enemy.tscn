@@ -97,7 +97,6 @@ sprite_frames = SubResource("SpriteFrames_8fcjq")
 animation = &"gift"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(-0.230415, 7.83409)
 scale = Vector2(0.999999, 0.999999)
 shape = SubResource("RectangleShape2D_k06m2")
@@ -108,6 +107,7 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Vision"]
+visible = false
 shape = SubResource("CircleShape2D_lbfho")
 
 [node name="HurtBox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
@@ -118,7 +118,6 @@ script = ExtResource("3_5y5tj")
 health = NodePath("../Health")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
-visible = false
 position = Vector2(-0.921657, 2.99539)
 shape = SubResource("RectangleShape2D_ltexv")
 
@@ -141,8 +140,7 @@ e = NodePath("..")
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 target_desired_distance = 25.0
 avoidance_enabled = true
-radius = 143.52
-debug_enabled = true
+time_horizon_obstacles = 1.0
 
 [connection signal="area_entered" from="Vision" to="." method="objectIsInView"]
 [connection signal="area_exited" from="Vision" to="." method="objectLeftView"]

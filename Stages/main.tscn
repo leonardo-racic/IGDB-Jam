@@ -439,31 +439,38 @@ avoidance_enabled = false
 [node name="LeftDoor" type="NavigationObstacle2D" parent="NavigationRegion2D"]
 vertices = PackedVector2Array(-805, 33, -776, 31, -774, 21, -772, 13, -812, 14)
 affect_navigation_mesh = true
+avoidance_enabled = false
 
 [node name="UpperDoor" type="NavigationObstacle2D" parent="NavigationRegion2D"]
 vertices = PackedVector2Array(-10, -352, 12, -352, 12, -344)
 affect_navigation_mesh = true
+avoidance_enabled = false
 
 [node name="UpperDoor2" type="NavigationObstacle2D" parent="NavigationRegion2D"]
 vertices = PackedVector2Array(-509, -352, -487, -343, -482, -347, -488, -354)
 affect_navigation_mesh = true
+avoidance_enabled = false
 
 [node name="LowerDoor" type="NavigationObstacle2D" parent="NavigationRegion2D"]
 vertices = PackedVector2Array(5, 416, -7, 416, -21, 407, -12, 395, -3, 394, 5, 406)
 affect_navigation_mesh = true
+avoidance_enabled = false
 
 [node name="RightDoor" type="NavigationObstacle2D" parent="NavigationRegion2D"]
 vertices = PackedVector2Array(740, 32, 772, 40, 772, 24, 740, 24)
 affect_navigation_mesh = true
+avoidance_enabled = false
 
 [node name="Player" type="NavigationObstacle2D" parent="NavigationRegion2D"]
 radius = 114.36
 affect_navigation_mesh = true
+avoidance_enabled = false
 
 [node name="Piano&Stool" type="NavigationObstacle2D" parent="NavigationRegion2D"]
 position = Vector2(-225, 16)
 vertices = PackedVector2Array(-254, -94, -303, -55, -274, 1, -232, 1, -213, 40, -162, 36, -144, -1, -112, 0, -70, -62, -117, -93)
 affect_navigation_mesh = true
+avoidance_enabled = false
 
 [node name="Enemies" type="Node2D" parent="."]
 

@@ -36,6 +36,12 @@ public partial class EnemyMovment : Node
       else
         scene.OnRobberEvaded(e);
     };
+
+    e.Nav.VelocityComputed += (Vector2 safeVelocity) =>
+    {
+      e.Velocity = safeVelocity;
+      move(20, e);
+    };
   }
 
   public override void _PhysicsProcess(double delta)
@@ -52,7 +58,7 @@ public partial class EnemyMovment : Node
     }
     else
       e.Sprite.SpeedScale = 1.0f;
-    move(20, e);
+    e.Nav.Velocity = e.Velocity;
   }
 
   private async void handleGiftGrabbing()
