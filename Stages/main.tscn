@@ -232,7 +232,7 @@ radius = 4.0
 height = 21.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hl6ks"]
-size = Vector2(1316.75, 335)
+size = Vector2(800.375, 645.5)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0lvtp"]
 radius = 19.0
@@ -358,7 +358,6 @@ outsideAreaShakeMag = 1.0
 outsideAreaShakeJit = 0.5
 
 [node name="Spawner" type="StaticBody2D" parent="." node_paths=PackedStringArray("enemiesOrigin")]
-visible = false
 collision_layer = 0
 collision_mask = 0
 script = ExtResource("6_rlhx0")
@@ -367,7 +366,7 @@ EnemyScene = ExtResource("7_t8hls")
 enemiesOrigin = NodePath("../Enemies")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Spawner"]
-position = Vector2(-1, -131)
+position = Vector2(257.188, 24.25)
 shape = SubResource("RectangleShape2D_hl6ks")
 disabled = true
 
@@ -522,4 +521,3 @@ text = "Round: XXX"
 label_settings = SubResource("LabelSettings_3167n")
 
 [connection signal="sendScreenShake" from="Player" to="Camera2D" method="applyScreenShake"]
-
