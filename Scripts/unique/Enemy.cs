@@ -24,9 +24,10 @@ public partial class Enemy : CharacterBody2D
   [Export]
   public PackedScene jewelScene;
 
+  public float HeldGiftsAmount;
+
   MainScene main;
 
-  private Node2D pl = null;
   private int PlayerCollisionID = 2;
 
   public override void _Ready()
@@ -43,6 +44,7 @@ public partial class Enemy : CharacterBody2D
   {
     movment.move(stepCount, this);
   }
+  
   public void onDead()
   {
     //WE SPAWN THEM DOUBLOONS
