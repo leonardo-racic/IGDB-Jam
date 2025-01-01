@@ -1,37 +1,31 @@
 using Godot;
 using System;
 
-public partial class spawner : StaticBody2D
+public partial class Spawner : StaticBody2D
 {
+  [Signal]
+  public delegate void SpawnCountSaturatedEventHandler();
+
   [Export]
   public int spawnCount;
   [Export]
   public float spawnTime = .5f;
   [Export]
   public PackedScene EnemyScene;
-  [Export]
-  public Node2D main;
+  [Export] // Where the enemies are spawned
+  public Node2D enemiesOrigin;
   [Export]
   public int MaxEnemyCount = 5;
   [Export] // Enemy's speed and accel + or - this variable (to make them more diverse ^^)
   public float VelocityEpsilon = 0.5f;
 
-  private float deltaElapsed = 0.0f;
+  public int spawnedEnemyCount = 0;
 
-  // Called every frame. 'delta' is the elapsed time since the previous frame.
-  public override void _Process(double delta)
+  public async void SpawnEnemies(int count = -1)
   {
-    if (deltaElapsed >= spawnTime)
-    {
-      spawnEnemies(spawnCount);
-      deltaElapsed = 0.0f;
-    }
-    deltaElapsed += (float)delta;
-  }
-
-  public void spawnEnemies(int count)
-  {
-    while (count > 0 && main.GetChildCount() < MaxEnemyCount)
+    if (count < 0)
+      count = MaxEnemyCount;
+    while (count > 0 && spawnedEnemyCount < MaxEnemyCount)
     {
       var areas = GetChildren();
       Random rand = new Random();
@@ -47,14 +41,18 @@ public partial class spawner : StaticBody2D
       // Enemy conditioning
       Enemy newEnemy = EnemyScene.Instantiate() as Enemy;
       newEnemy.GlobalPosition = globalPos;
-      newEnemy.movment.ACCEL += (rand.NextSingle() >= 0.5f ? -1 : 1) * VelocityEpsilon;
-      newEnemy.movment.SPEED += (rand.NextSingle() >= 0.5f ? -1 : 1) * VelocityEpsilon;
-      main.AddChild(newEnemy);
+      newEnemy.movment.ACCEL += rand.NextSingle() * VelocityEpsilon;
+      newEnemy.movment.SPEED += rand.NextSingle() * VelocityEpsilon;
+      enemiesOrigin.AddChild(newEnemy);
       count--;
+      spawnedEnemyCount++;
+      await ToSignal(GetTree().CreateTimer(spawnTime), "timeout");
     }
+    if (spawnedEnemyCount >= MaxEnemyCount)
+      EmitSignal(nameof(SpawnCountSaturated));
   }
-  public float nextSingle(Random rand, float mag)
-  {
-    return rand.NextSingle() * mag;
-  }
+
+  public float nextSingle(Random rand, float mag) => rand.NextSingle() * mag;
+
+  public bool ReadyToSpawn() => enemiesOrigin.GetChildCount() == 0;
 }

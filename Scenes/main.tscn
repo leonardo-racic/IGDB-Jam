@@ -1,10 +1,10 @@
-[gd_scene load_steps=24 format=4 uid="uid://o51s4fmin34l"]
+[gd_scene load_steps=20 format=4 uid="uid://o51s4fmin34l"]
 
 [ext_resource type="PackedScene" uid="uid://doqjj6i3kg3ow" path="res://Scenes/player.tscn" id="1_4a1jc"]
 [ext_resource type="Script" path="res://Scripts/unique/MainScene.cs" id="1_4gme0"]
 [ext_resource type="Script" path="res://Scripts/unique/camera.cs" id="1_mfgub"]
 [ext_resource type="PackedScene" uid="uid://b8ksd0iqhrowa" path="res://Scenes/enemy.tscn" id="3_mcght"]
-[ext_resource type="Script" path="res://Scripts/unique/spawner.cs" id="4_mv2ye"]
+[ext_resource type="Script" path="res://Scripts/unique/Spawner.cs" id="4_mv2ye"]
 [ext_resource type="Texture2D" uid="uid://5khvxw35be0g" path="res://Assets/wall.png" id="4_oti2j"]
 [ext_resource type="Texture2D" uid="uid://iov4pc5q2xgi" path="res://Assets/blocks-Sheet.png" id="7_0fovu"]
 [ext_resource type="PackedScene" uid="uid://b50jidx5a5pqa" path="res://UI/gift_bar.tscn" id="8_u5jwg"]
@@ -221,26 +221,6 @@ terrain_set_0/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
 navigation_layer_0/layers = 1
 sources/0 = SubResource("TileSetAtlasSource_6d0xx")
 
-[sub_resource type="BoxMesh" id="BoxMesh_2njpf"]
-size = Vector3(1000, 1000, 1000)
-
-[sub_resource type="Curve" id="Curve_81ytm"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.406593, 0), 0.0, 0.0, 0, 0, Vector2(0.967033, 0.692308), 0.0, 0.0, 0, 0]
-point_count = 3
-
-[sub_resource type="Curve" id="Curve_bf4oy"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.510989, 0), 0.0, 0.0, 0, 0, Vector2(1, 0.747253), 0.0, 0.0, 0, 0]
-point_count = 3
-
-[sub_resource type="Curve" id="Curve_lcl7a"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.368132, 0.296703), 0.0, 0.0, 0, 0, Vector2(0.714286, 0.406593), 0.0, 0.0, 0, 0]
-point_count = 3
-
-[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_mbxes"]
-curve_x = SubResource("Curve_81ytm")
-curve_y = SubResource("Curve_bf4oy")
-curve_z = SubResource("Curve_lcl7a")
-
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ucosi"]
 load_path = "res://.godot/imported/blocks-Sheet.png-e9ac73189fd5e6199b280c029ad33460.ctex"
 
@@ -266,14 +246,21 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(-827, -448, -828, 448, 
 [sub_resource type="ViewportTexture" id="ViewportTexture_jpoxo"]
 viewport_path = NodePath("IconViewport")
 
-[node name="Main" type="Node2D" node_paths=PackedStringArray("ChristmasTree", "NavRegion", "plr", "GiftBar")]
+[sub_resource type="LabelSettings" id="LabelSettings_3167n"]
+font_size = 64
+outline_size = 24
+outline_color = Color(0, 0, 0, 1)
+
+[node name="Main" type="Node2D" node_paths=PackedStringArray("ChristmasTree", "NavRegion", "plr", "GiftBar", "spawner", "RoundLabel")]
 texture_filter = 1
 position = Vector2(1, 0)
 script = ExtResource("1_4gme0")
 ChristmasTree = NodePath("ChristmasTree")
 NavRegion = NodePath("NavigationRegion2D")
 plr = NodePath("Player")
-GiftBar = NodePath("CanvasLayer/MarginContainer/GiftBar")
+GiftBar = NodePath("CanvasLayer/GiftBarMarginContainer/GiftBar")
+spawner = NodePath("Spawner")
+RoundLabel = NodePath("CanvasLayer/RoundMarginContainer/RoundLabel")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 scale = Vector2(2, 2)
@@ -282,13 +269,6 @@ tile_set = SubResource("TileSet_12t3i")
 collision_visibility_mode = 1
 navigation_enabled = false
 navigation_visibility_mode = 1
-
-[node name="Background" type="MeshInstance2D" parent="."]
-visible = false
-position = Vector2(0, 64)
-scale = Vector2(0.674, 0.674)
-mesh = SubResource("BoxMesh_2njpf")
-texture = SubResource("CurveXYZTexture_mbxes")
 
 [node name="Doors" type="Node2D" parent="."]
 scale = Vector2(2, 2)
@@ -377,13 +357,14 @@ restingPos = Vector2(-266, 108)
 outsideAreaShakeMag = 1.0
 outsideAreaShakeJit = 0.5
 
-[node name="Spawner" type="StaticBody2D" parent="." node_paths=PackedStringArray("main")]
+[node name="Spawner" type="StaticBody2D" parent="." node_paths=PackedStringArray("enemiesOrigin")]
+visible = false
 collision_layer = 0
 collision_mask = 0
 script = ExtResource("4_mv2ye")
 spawnCount = 1
 EnemyScene = ExtResource("3_mcght")
-main = NodePath("../Enemies")
+enemiesOrigin = NodePath("../Enemies")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Spawner"]
 position = Vector2(-1, -131)
@@ -480,11 +461,38 @@ affect_navigation_mesh = true
 radius = 114.36
 affect_navigation_mesh = true
 
+[node name="Piano&Stool" type="NavigationObstacle2D" parent="NavigationRegion2D"]
+position = Vector2(-225, 16)
+vertices = PackedVector2Array(-238, -149, -290, -59, -274, 1, -232, 1, -213, 40, -162, 36, -144, -1, -112, 0, -70, -62, -111, -153)
+affect_navigation_mesh = true
+
 [node name="Enemies" type="Node2D" parent="."]
+
+[node name="Obstacles" type="Node2D" parent="."]
+
+[node name="Piano" type="StaticBody2D" parent="Obstacles"]
+position = Vector2(-437, -55)
+scale = Vector2(5, 5)
+metadata/_edit_group_ = true
+
+[node name="Piano" type="Sprite2D" parent="Obstacles/Piano"]
+texture = ExtResource("7_0fovu")
+region_enabled = true
+region_rect = Rect2(80, 64, 48, 32)
+
+[node name="Stool" type="Sprite2D" parent="Obstacles/Piano"]
+position = Vector2(2.8, 17)
+scale = Vector2(0.8375, 0.4625)
+texture = ExtResource("7_0fovu")
+region_enabled = true
+region_rect = Rect2(96, 96, 16, 16)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Obstacles/Piano"]
+polygon = PackedVector2Array(-14, 1, -13.6, 6.6, -10.8, 8.4, -11.4, 11.8, -4.2, 14.4, -0.799999, 21.6, 8.2, 21.6, 12.2, 15, 18.8, 11.8, 18.6, 7.6, 22, 6.6, 21.8, 0.599999, 17.8, -13.2, -6.2, -13.8)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
+[node name="GiftBarMarginContainer" type="MarginContainer" parent="CanvasLayer"]
 offset_right = 27.0
 offset_bottom = 26.0
 scale = Vector2(4, 4)
@@ -493,8 +501,25 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="GiftBar" parent="CanvasLayer/MarginContainer" instance=ExtResource("8_u5jwg")]
+[node name="GiftBar" parent="CanvasLayer/GiftBarMarginContainer" instance=ExtResource("8_u5jwg")]
 layout_mode = 2
 texture = SubResource("ViewportTexture_jpoxo")
+
+[node name="RoundMarginContainer" type="MarginContainer" parent="CanvasLayer"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+offset_right = 40.0
+grow_vertical = 0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="RoundLabel" type="Label" parent="CanvasLayer/RoundMarginContainer"]
+layout_mode = 2
+text = "Round: XXX"
+label_settings = SubResource("LabelSettings_3167n")
 
 [connection signal="sendScreenShake" from="Player" to="Camera2D" method="applyScreenShake"]
