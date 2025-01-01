@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://dcb2wplfxrv6c"]
+
+[ext_resource type="Script" path="res://Scripts/unique/destructableObstacle.cs" id="1_j5a3i"]
+[ext_resource type="Script" path="res://Scripts/Composites/Hurtbox.cs" id="2_883wt"]
+[ext_resource type="Script" path="res://Scripts/Composites/HealthNode.cs" id="3_3y6w0"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_53c4k"]
+radius = 47.0106
+
+[node name="Obstacle" type="Sprite2D" node_paths=PackedStringArray("collisionShapes")]
+script = ExtResource("1_j5a3i")
+collisionShapes = []
+
+[node name="CollisionBody" type="StaticBody2D" parent="."]
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionBody"]
+shape = SubResource("CircleShape2D_53c4k")
+
+[node name="Hurtbox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
+script = ExtResource("2_883wt")
+health = NodePath("../Health")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("CircleShape2D_53c4k")
+
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="."]
+radius = 47.0
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("3_3y6w0")
