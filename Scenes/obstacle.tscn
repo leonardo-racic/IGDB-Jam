@@ -9,6 +9,7 @@
 radius = 100.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_v484h"]
+radius = 25.318
 
 [node name="Obstacle" type="Sprite2D" node_paths=PackedStringArray("navOb", "healthNode", "collShape")]
 texture = ExtResource("1_otgvf")

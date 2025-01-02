@@ -1,5 +1,4 @@
 using Godot;
-using System;
 
 public partial class destructableObstacle : Sprite2D
 {
@@ -26,14 +25,9 @@ public partial class destructableObstacle : Sprite2D
     healthNode.Dead += () => onDead();
   }
 
-  // Called every frame. 'delta' is the elapsed time since the previous frame.
-  public override void _Process(double delta)
-  {
-
-  }
-
   void onDead()
   {
+    (GetTree().CurrentScene as MainScene).ObstacleBrokenSound.Play();
     navOb.QueueFree();
     QueueFree();
   }

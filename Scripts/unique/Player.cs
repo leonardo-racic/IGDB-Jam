@@ -10,6 +10,12 @@ public partial class Player : CharacterBody2D
   public float tackleShakeMag;
   [Export]
   public float tackleShakeJitness;
+
+  [Export]
+  public AudioStreamPlayer2D WalkingSound;
+  [Export]
+  public AudioStreamPlayer2D MeowelerySound;
+
   [Signal]
   public delegate void sendScreenShakeEventHandler(float mag, float dir, float jitness);
 
@@ -27,6 +33,12 @@ public partial class Player : CharacterBody2D
   public override void _Ready()
   {
     TackleHitbox.Monitorable = false;
+
+    Sprite.FrameChanged += () =>
+    {
+      if (Sprite.Animation == "move")
+        WalkingSound.Play();
+    };
   }
 
   public override async void _Input(InputEvent inputEvent)
@@ -62,5 +74,6 @@ public partial class Player : CharacterBody2D
   public void onJewelCollect(Area2D area)
   {
     money += (area as Hitbox).Damage;
+    MeowelerySound.Play();
   }
 }

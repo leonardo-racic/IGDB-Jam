@@ -1,19 +1,21 @@
-[gd_scene load_steps=18 format=3 uid="uid://b8ksd0iqhrowa"]
+[gd_scene load_steps=20 format=3 uid="uid://b8ksd0iqhrowa"]
 
-[ext_resource type="Script" path="res://Scripts/unique/Enemy.cs" id="1_4g8bb"]
-[ext_resource type="Texture2D" uid="uid://d8xoni7e4v0k" path="res://Assets/stealer-Sheet.png" id="1_ov56a"]
-[ext_resource type="PackedScene" uid="uid://b6fehtatg86tg" path="res://Scenes/jewel.tscn" id="2_k2egx"]
-[ext_resource type="Script" path="res://Scripts/Composites/Hurtbox.cs" id="3_5y5tj"]
-[ext_resource type="Texture2D" uid="uid://iov4pc5q2xgi" path="res://Assets/blocks-Sheet.png" id="3_fkdlt"]
-[ext_resource type="Script" path="res://Scripts/Composites/HealthNode.cs" id="4_frcda"]
-[ext_resource type="Script" path="res://Scripts/unique/EnemyMovment.cs" id="5_bl537"]
+[ext_resource type="Script" path="res://Scripts/unique/Enemy.cs" id="1_kynue"]
+[ext_resource type="PackedScene" uid="uid://b6fehtatg86tg" path="res://Scenes/jewel.tscn" id="2_lnyfj"]
+[ext_resource type="Texture2D" uid="uid://d8xoni7e4v0k" path="res://Assets/stealer-Sheet.png" id="3_x20bv"]
+[ext_resource type="Texture2D" uid="uid://iov4pc5q2xgi" path="res://Assets/blocks-Sheet.png" id="4_tg3kl"]
+[ext_resource type="Script" path="res://Scripts/Composites/Hurtbox.cs" id="5_yq4bw"]
+[ext_resource type="Script" path="res://Scripts/Composites/HealthNode.cs" id="6_j1638"]
+[ext_resource type="Script" path="res://Scripts/unique/EnemyMovment.cs" id="7_gws28"]
+[ext_resource type="AudioStream" uid="uid://bfj1on44juxcy" path="res://Assets/EnemyWalking.wav" id="8_ovjvt"]
+[ext_resource type="AudioStream" uid="uid://c820j4pbrvb2r" path="res://Assets/EnemyTackled!.wav" id="10_ndxuf"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_plu8u"]
-atlas = ExtResource("1_ov56a")
+atlas = ExtResource("3_x20bv")
 region = Rect2(0, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2q6cq"]
-atlas = ExtResource("1_ov56a")
+atlas = ExtResource("3_x20bv")
 region = Rect2(64, 0, 64, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_5cuc8"]
@@ -31,11 +33,11 @@ animations = [{
 }]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gealr"]
-atlas = ExtResource("3_fkdlt")
+atlas = ExtResource("4_tg3kl")
 region = Rect2(80, 96, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pwq5y"]
-atlas = ExtResource("1_ov56a")
+atlas = ExtResource("3_x20bv")
 region = Rect2(128, 0, 64, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_8fcjq"]
@@ -68,11 +70,11 @@ size = Vector2(30.4148, 33.6406)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_t6s4h"]
 
-[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("movment", "Nav", "Pivot", "healthNode", "Hand", "Sprite")]
+[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("movment", "Nav", "Pivot", "healthNode", "Hand", "Sprite", "WalkingSound", "TackledSound")]
 position = Vector2(0.5, -17)
 scale = Vector2(2.17, 2.17)
 collision_layer = 0
-script = ExtResource("1_4g8bb")
+script = ExtResource("1_kynue")
 movment = NodePath("EnemyMovment")
 Nav = NodePath("NavigationAgent2D")
 Pivot = NodePath("Pivot")
@@ -81,7 +83,9 @@ Hand = NodePath("Pivot/Hand")
 Sprite = NodePath("Pivot/Character")
 jewelDropCount = 3
 minMaxJewelSpeed = Vector2(100, 150)
-jewelScene = ExtResource("2_k2egx")
+jewelScene = ExtResource("2_lnyfj")
+WalkingSound = NodePath("WalkingSoundPlayer")
+TackledSound = NodePath("TackledSoundPlayer")
 metadata/_edit_group_ = true
 
 [node name="Pivot" type="Node2D" parent="."]
@@ -116,7 +120,7 @@ shape = SubResource("CircleShape2D_lbfho")
 visible = false
 collision_layer = 0
 collision_mask = 2
-script = ExtResource("3_5y5tj")
+script = ExtResource("5_yq4bw")
 health = NodePath("../Health")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
@@ -132,17 +136,23 @@ collide_with_areas = true
 collide_with_bodies = false
 
 [node name="Health" type="Node" parent="."]
-script = ExtResource("4_frcda")
+script = ExtResource("6_j1638")
 MaxHealth = 1.0
 
 [node name="EnemyMovment" type="Node" parent="." node_paths=PackedStringArray("e")]
-script = ExtResource("5_bl537")
+script = ExtResource("7_gws28")
 e = NodePath("..")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 target_desired_distance = 25.0
 avoidance_enabled = true
 time_horizon_obstacles = 1.0
+
+[node name="WalkingSoundPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_ovjvt")
+
+[node name="TackledSoundPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("10_ndxuf")
 
 [connection signal="area_entered" from="Vision" to="." method="objectIsInView"]
 [connection signal="area_exited" from="Vision" to="." method="objectLeftView"]

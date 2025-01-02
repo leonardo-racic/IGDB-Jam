@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dp2nfu83lyykl"]
+
+[ext_resource type="AudioStream" uid="uid://bsi0u0v3uifpx" path="res://Assets/GottaHurryUp!.wav" id="1_uxe35"]
+
+[node name="BackgroundMusicPlayer" type="AudioStreamPlayer"]
+stream = ExtResource("1_uxe35")
+autoplay = true

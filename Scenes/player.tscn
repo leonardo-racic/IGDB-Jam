@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://doqjj6i3kg3ow"]
+[gd_scene load_steps=18 format=3 uid="uid://doqjj6i3kg3ow"]
 
 [ext_resource type="Script" path="res://Scripts/unique/Player.cs" id="1_4e5hf"]
 [ext_resource type="Texture2D" uid="uid://cwwhcul0o331m" path="res://Assets/player-Sheet.png" id="2_u5f10"]
@@ -6,6 +6,8 @@
 [ext_resource type="Script" path="res://Scripts/Composites/HealthNode.cs" id="3_ytnh2"]
 [ext_resource type="Script" path="res://Scripts/Composites/Hurtbox.cs" id="5_62jck"]
 [ext_resource type="Script" path="res://Scripts/Composites/Hitbox.cs" id="6_mn3tx"]
+[ext_resource type="AudioStream" uid="uid://btm8bmtk3i3oi" path="res://Assets/CatWalking.wav" id="7_08aws"]
+[ext_resource type="AudioStream" uid="uid://dnetf38mgqwha" path="res://Assets/GotACoin!.wav" id="8_sfh7c"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xis2n"]
 atlas = ExtResource("2_u5f10")
@@ -68,7 +70,7 @@ height = 43.19
 [sub_resource type="CircleShape2D" id="CircleShape2D_7bok3"]
 radius = 58.1378
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("Sprite", "TackleHitbox")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("Sprite", "TackleHitbox", "WalkingSound", "MeowelerySound")]
 position = Vector2(0, -16)
 collision_layer = 2
 script = ExtResource("1_4e5hf")
@@ -76,6 +78,8 @@ Sprite = NodePath("AnimatedSprite2D")
 TackleHitbox = NodePath("Hitbox")
 tackleShakeMag = 3.0
 tackleShakeJitness = 2.0
+WalkingSound = NodePath("WalkingSound")
+MeowelerySound = NodePath("MeowelerySound")
 metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -126,6 +130,12 @@ collision_mask = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="JewelCollectionRange"]
 shape = SubResource("CircleShape2D_7bok3")
+
+[node name="WalkingSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_08aws")
+
+[node name="MeowelerySound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_sfh7c")
 
 [connection signal="area_entered" from="Hitbox" to="Hitbox" method="onAreaEntered"]
 [connection signal="area_entered" from="JewelCollectionRange" to="." method="onJewelCollect"]

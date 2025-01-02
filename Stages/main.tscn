@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=4 uid="uid://o51s4fmin34l"]
+[gd_scene load_steps=19 format=4 uid="uid://o51s4fmin34l"]
 
 [ext_resource type="PackedScene" uid="uid://doqjj6i3kg3ow" path="res://Scenes/player.tscn" id="1_4a1jc"]
 [ext_resource type="Script" path="res://Scripts/unique/MainScene.cs" id="1_4gme0"]
@@ -13,13 +13,19 @@
 [ext_resource type="PackedScene" uid="uid://cti5hpej3mp5n" path="res://UI/game_ui.tscn" id="9_te06m"]
 [ext_resource type="PackedScene" uid="uid://bv2mm0qfxbwnr" path="res://Scenes/spawner.tscn" id="10_ad217"]
 [ext_resource type="PackedScene" uid="uid://cjpfq78ha4fak" path="res://Scenes/christmas_tree.tscn" id="11_61gl1"]
+[ext_resource type="PackedScene" uid="uid://dp2nfu83lyykl" path="res://Scenes/background_music_player.tscn" id="14_26xt0"]
+[ext_resource type="AudioStream" uid="uid://di3p0hdprc80q" path="res://Assets/EnemyLeft.wav" id="15_6pcyq"]
+[ext_resource type="AudioStream" uid="uid://dklaxcqkbwtlk" path="res://Assets/ObstacleBroken.wav" id="16_7i8ht"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_tmnjj"]
 vertices = PackedVector2Array(15, 426, 795, 438, -817.992, 438, -9.9375, 426, 782, 14, 730, 14, 124.711, 0, 108.008, -62.3594, 795, -438, 782, 52.8125, -817.531, 27.8984, -811.789, 43.4922, 730, 39.8125, 1.9375, 383.391, -212.719, 213.578, -214, 186.719, -214, 160.617, 0, 124.711, -35.4531, 409.602, -767.688, 40.4531, 22, -329.719, 22, -362, 62.3594, -108.008, -817.008, -438, -18.3906, -362, -21.2969, -345.469, -483.781, -364.453, -759.109, 2.67188, -817.5, 4.13281, -517.75, -361.211, -520.039, -345.711, 15, 402.969, 108.008, 62.3594, -17.3984, 385.539, -764.219, 23.1094, -275.227, 225, 0, -124.711, -467.68, -345.648, -62.3594, -108.008, -108.008, -62.3594, -485.344, -331.523, -124.711, 0, -232.297, 225, -108.008, 62.3594, 62.3594, 108.008, -276.172, 143, -62.3594, 108.008, -233.094, 143, -300, 207.109, -300, 159.82)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7), PackedInt32Array(8, 1, 9, 4), PackedInt32Array(2, 10, 11), PackedInt32Array(12, 9, 1, 13, 14, 15, 16, 17), PackedInt32Array(18, 3, 2, 11, 19), PackedInt32Array(20, 21, 8, 4, 7, 22), PackedInt32Array(23, 8, 21, 24), PackedInt32Array(23, 24, 25, 26), PackedInt32Array(27, 28, 23, 29, 30), PackedInt32Array(1, 0, 31), PackedInt32Array(6, 5, 12, 32), PackedInt32Array(33, 18, 19, 34, 27, 35), PackedInt32Array(25, 20, 22, 36, 37, 26), PackedInt32Array(37, 36, 38), PackedInt32Array(37, 38, 39, 40), PackedInt32Array(40, 39, 41, 27, 30), PackedInt32Array(1, 31, 13), PackedInt32Array(14, 13, 33, 42), PackedInt32Array(23, 26, 29), PackedInt32Array(27, 41, 43), PackedInt32Array(44, 32, 12), PackedInt32Array(45, 27, 43, 46, 47), PackedInt32Array(35, 42, 33), PackedInt32Array(48, 35, 27), PackedInt32Array(49, 48, 27), PackedInt32Array(45, 49, 27), PackedInt32Array(16, 47, 46, 17), PackedInt32Array(12, 17, 44)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-827, -448, -828, 448, 805, 448, 805, -448)])
 
-[node name="Main" type="Node2D" node_paths=PackedStringArray("ChristmasTree", "NavRegion", "plr", "UI", "spawner")]
+[sub_resource type="CircleShape2D" id="CircleShape2D_e0tvb"]
+radius = 17.0294
+
+[node name="Main" type="Node2D" node_paths=PackedStringArray("ChristmasTree", "NavRegion", "plr", "UI", "spawner", "audio", "doorOpenedSound", "ObstacleBrokenSound")]
 process_mode = 3
 texture_filter = 1
 position = Vector2(1, 0)
@@ -29,6 +35,9 @@ NavRegion = NodePath("NavigationRegion2D")
 plr = NodePath("Player")
 UI = NodePath("GameUI")
 spawner = NodePath("Spawner")
+audio = NodePath("BackgroundMusicPlayer")
+doorOpenedSound = NodePath("DoorOpenedSoundPlayer")
+ObstacleBrokenSound = NodePath("ObstacleBrokenSoundPlayer")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 process_mode = 1
@@ -150,6 +159,22 @@ region_rect = Rect2(96, 96, 16, 16)
 polygon = PackedVector2Array(-14, 1, -13.6, 6.6, -10.8, 8.4, -11.4, 11.8, -4.2, 14.4, -0.799999, 21.6, 8.2, 21.6, 12.2, 15, 18.8, 11.8, 18.6, 7.6, 22, 6.6, 21.8, 0.599999, 18, -2.4, -9.39999, -2.4)
 
 [node name="Obstacle" parent="Obstacles" instance=ExtResource("9_n47qg")]
+region_enabled = true
+region_rect = Rect2(96, 16, 32, 32)
+
+[node name="CollisionShape2D" parent="Obstacles/Obstacle/Collision" index="0"]
+shape = SubResource("CircleShape2D_e0tvb")
 
 [node name="GameUI" parent="." instance=ExtResource("9_te06m")]
 visible = false
+
+[node name="BackgroundMusicPlayer" parent="." instance=ExtResource("14_26xt0")]
+volume_db = -4.0
+
+[node name="DoorOpenedSoundPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("15_6pcyq")
+
+[node name="ObstacleBrokenSoundPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("16_7i8ht")
+
+[editable path="Obstacles/Obstacle"]

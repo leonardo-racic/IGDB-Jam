@@ -12,6 +12,7 @@ public partial class MainMenu : CanvasLayer
 			string scenePath = $"res://Stages/{button.Name.ToString().TrimSuffix("Label").ToLower()}.tscn";
 			button.Pressed += () =>
 			{
+				GetNode<AudioStreamPlayer>("ClickedSound").Play();
 				GetTree().ChangeSceneToFile(scenePath);
 			};
 		}

@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://cti5hpej3mp5n"]
+[gd_scene load_steps=8 format=3 uid="uid://cti5hpej3mp5n"]
 
 [ext_resource type="PackedScene" uid="uid://b50jidx5a5pqa" path="res://UI/gift_bar.tscn" id="1_o6g0l"]
 [ext_resource type="Script" path="res://Scripts/unique/GameUI.cs" id="1_wm68i"]
+[ext_resource type="AudioStream" uid="uid://b1v2p57n8d5c0" path="res://Assets/Clicked.wav" id="3_wlnsx"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_jpoxo"]
 viewport_path = NodePath("IconViewport")
@@ -114,3 +115,6 @@ custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 64
 text = "Back"
+
+[node name="ClickedSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_wlnsx")

@@ -25,11 +25,13 @@ public partial class GameUI : CanvasLayer
 
 		RetryButton.Pressed += () =>
 		{
+			GetNode<AudioStreamPlayer>("ClickedSound").Play();
 			GetTree().Paused = false;
 			GetTree().ReloadCurrentScene();
 		};
 		BackButton.Pressed += () => 
 		{
+			GetNode<AudioStreamPlayer>("ClickedSound").Play();
 			GetTree().Paused = false;
 			GetTree().ChangeSceneToFile("res://UI/main_menu.tscn");
 		};

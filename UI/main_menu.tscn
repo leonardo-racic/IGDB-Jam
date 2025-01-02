@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://c4ca5bwu03rym"]
+[gd_scene load_steps=6 format=3 uid="uid://c4ca5bwu03rym"]
 
 [ext_resource type="Script" path="res://Scripts/unique/MainMenu.cs" id="1_gc8r3"]
 [ext_resource type="Texture2D" uid="uid://co0pnx2hcvse6" path="res://Assets/icon.png" id="2_aw6bf"]
+[ext_resource type="AudioStream" uid="uid://b1v2p57n8d5c0" path="res://Assets/Clicked.wav" id="3_7sfr4"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_an8ax"]
 font_size = 171
@@ -68,3 +69,6 @@ text = "Made by (Dev)Ado, maningreen,
 nedyarb08, Matt Slaven"
 label_settings = SubResource("LabelSettings_uy37t")
 horizontal_alignment = 1
+
+[node name="ClickedSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_7sfr4")

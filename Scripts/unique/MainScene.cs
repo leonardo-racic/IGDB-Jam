@@ -14,6 +14,12 @@ public partial class MainScene : Node2D
 	public float StartingGiftsAmount = 12.0f;
 	[Export]
 	public Spawner spawner;
+	[Export]
+	public AudioStreamPlayer audio;
+	[Export]
+  	public AudioStreamPlayer2D doorOpenedSound;
+	[Export] // Used by another script
+	public AudioStreamPlayer2D ObstacleBrokenSound;
 
 
 	public int Round
@@ -74,6 +80,8 @@ public partial class MainScene : Node2D
 			if (Round % 2 == 0)
 				spawner.MaxEnemyCount = (int)Mathf.Ceil(spawner.MaxEnemyCount * 2);
 		};
+
+		audio.Finished += () => audio.Play();
     }
 
     public override void _PhysicsProcess(double delta)
@@ -101,5 +109,6 @@ public partial class MainScene : Node2D
 	{
 		GiftsAmount -= robber.HeldGiftsAmount;
 		robber.QueueFree();
+		doorOpenedSound.Play();
 	}
 }

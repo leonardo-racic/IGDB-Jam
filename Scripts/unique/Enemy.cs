@@ -23,6 +23,10 @@ public partial class Enemy : CharacterBody2D
   public Vector2 minMaxJewelSpeed;
   [Export]
   public PackedScene jewelScene;
+  [Export]
+  public AudioStreamPlayer2D WalkingSound;
+  [Export]
+  public AudioStreamPlayer2D TackledSound;
 
   public float HeldGiftsAmount;
 
@@ -39,6 +43,7 @@ public partial class Enemy : CharacterBody2D
     main = GetTree().CurrentScene as MainScene;
 
     healthNode.Dead += () => onDead();
+    Sprite.AnimationLooped += () => WalkingSound.Play();
   }
 
   public override void _PhysicsProcess(double delta)
@@ -49,6 +54,7 @@ public partial class Enemy : CharacterBody2D
   public void onDead()
   {
     //WE SPAWN THEM DOUBLOONS
+    TackledSound.Play();
     while (jewelDropCount > 0)
     {
       jewel instance = jewelScene.Instantiate() as jewel;
