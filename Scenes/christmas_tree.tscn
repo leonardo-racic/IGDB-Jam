@@ -1,0 +1,63 @@
+[gd_scene load_steps=3 format=3 uid="uid://cjpfq78ha4fak"]
+
+[ext_resource type="Texture2D" uid="uid://iov4pc5q2xgi" path="res://Assets/blocks-Sheet.png" id="1_rjs6k"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0lvtp"]
+radius = 19.0
+height = 54.0
+
+[node name="ChristmasTree" type="Node2D"]
+process_mode = 1
+position = Vector2(-266, 108)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 5
+scale = Vector2(5, 5)
+texture = ExtResource("1_rjs6k")
+region_enabled = true
+region_rect = Rect2(17, 73, 30, 39)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(4, 84)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_0lvtp")
+
+[node name="Markers" type="Node2D" parent="."]
+
+[node name="Root" type="Marker2D" parent="Markers"]
+position = Vector2(6, 117)
+
+[node name="Root2" type="Marker2D" parent="Markers"]
+position = Vector2(-24, 109)
+
+[node name="Root3" type="Marker2D" parent="Markers"]
+position = Vector2(30, 112)
+
+[node name="Root4" type="Marker2D" parent="Markers"]
+position = Vector2(52, 101)
+
+[node name="Root5" type="Marker2D" parent="Markers"]
+position = Vector2(49, 80)
+
+[node name="Root6" type="Marker2D" parent="Markers"]
+position = Vector2(-40, 83)
+
+[node name="Root7" type="Marker2D" parent="Markers"]
+position = Vector2(-48, 56)
+
+[node name="Root8" type="Marker2D" parent="Markers"]
+position = Vector2(-34, 41)
+
+[node name="Root9" type="Marker2D" parent="Markers"]
+position = Vector2(-7, 34)
+
+[node name="Root10" type="Marker2D" parent="Markers"]
+position = Vector2(37, 34)
+
+[node name="Root11" type="Marker2D" parent="Markers"]
+position = Vector2(46, 58)
+
+[node name="TreeRoot" type="Marker2D" parent="."]
+position = Vector2(266, -108)

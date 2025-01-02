@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://duutj0er6emw4"]
+
+[ext_resource type="Texture2D" uid="uid://iov4pc5q2xgi" path="res://Assets/blocks-Sheet.png" id="1_cssf7"]
+
+[node name="UpperDoor" type="Node2D"]
+position = Vector2(0.5, -188)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_cssf7")
+region_enabled = true
+region_rect = Rect2(48, 32, 16, 32)
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(5, 13)

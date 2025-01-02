@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://sljw2gxe70bv"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ucosi"]
+load_path = "res://.godot/imported/blocks-Sheet.png-e9ac73189fd5e6199b280c029ad33460.ctex"
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4x11r"]
+height = 37.0
+
+[node name="RightDoor" type="StaticBody2D"]
+position = Vector2(376, 0)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("CompressedTexture2D_ucosi")
+region_enabled = true
+region_rect = Rect2(64, 32, 16, 32)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_4x11r")
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(-16.5, 4)

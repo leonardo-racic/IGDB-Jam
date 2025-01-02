@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://bv2mm0qfxbwnr"]
+
+[ext_resource type="Script" path="res://Scripts/unique/Spawner.cs" id="1_bt5vr"]
+[ext_resource type="PackedScene" uid="uid://b8ksd0iqhrowa" path="res://Scenes/enemy.tscn" id="2_140q5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hl6ks"]
+size = Vector2(1410.38, 678.5)
+
+[node name="Spawner" type="StaticBody2D" node_paths=PackedStringArray("enemiesOrigin")]
+process_mode = 1
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_bt5vr")
+spawnCount = 1
+EnemyScene = ExtResource("2_140q5")
+enemiesOrigin = NodePath("")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-47.8123, 40.75)
+shape = SubResource("RectangleShape2D_hl6ks")
+disabled = true
