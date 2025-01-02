@@ -79,3 +79,5 @@ stream = ExtResource("3_7sfr4")
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_y4hdw")
 autoplay = true
+
+[node name="Node" type="Node" parent="."]
