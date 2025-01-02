@@ -177,4 +177,6 @@ stream = ExtResource("15_6pcyq")
 [node name="ObstacleBrokenSoundPlayer" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("16_7i8ht")
 
+[connection signal="sendScreenShake" from="Player" to="Camera2D" method="applyScreenShake"]
+
 [editable path="Obstacles/Obstacle"]

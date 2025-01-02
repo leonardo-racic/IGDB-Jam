@@ -165,5 +165,7 @@ plr = NodePath("../Player")
 
 [node name="BackgroundMusicPlayer" parent="." instance=ExtResource("12_wpuhv")]
 
+[connection signal="sendScreenShake" from="Player" to="Camera2D" method="applyScreenShake"]
+
 [editable path="Doors/LeftDoor"]
 [editable path="Spawner"]
